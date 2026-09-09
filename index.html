@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Association du quartier du Barrou à Sète — animations, activités et vie locale au bord de l'étang de Thau." />
+<title>Association du Quartier du Barrou — Sète</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  /* Palette Sud — sable, terracotta, bleu Méditerranée */
+  --sand-50:  #fbf6ef;
+  --sand-100: #f5ecdd;
+  --sand-200: #ead8bb;
+  --sand-300: #d9c098;
+  --terra-400:#cf6e4a;
+  --terra-500:#b8542f;
+  --terra-600:#9a4322;
+  --med-500:  #2a6f86;
+  --med-600:  #1f5468;
+  --med-700:  #163e4d;
+  --olive-600:#6b7c4d;
+  --ink:      #2a2018;
+  --ink-soft: #5a4a3d;
+  --line:     #e3d6c0;
+  --white:    #fffbf4;
+
+  --serif: "Fraunces", "Times New Roman", serif;
+  --sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --radius-sm: 6px;
+  --radius:    12px;
+  --radius-lg: 20px;
+
+  --shadow-sm: 0 1px 2px rgba(42,32,24,.06), 0 1px 3px rgba(42,32,24,.04);
+  --shadow:    0 4px 12px rgba(42,32,24,.08), 0 2px 4px rgba(42,32,24,.05);
+  --shadow-lg: 0 12px 32px rgba(42,32,24,.12), 0 4px 8px rgba(42,32,24,.06);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--sand-50);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Skip-link accessibilité */
+.skip-link{
+  position:absolute; left:-9999px; top:0;
+  background: var(--med-700); color:#fff; padding:.75rem 1.25rem;
+  z-index:9999; font-weight:600; text-decoration:none; border-radius: 0 0 var(--radius) 0;
+}
+.skip-link:focus{ left:0; }
+
+img{ max-width:100%; display:block; }
+a{ color: var(--med-600); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover{ color: var(--terra-500); }
+:focus-visible{
+  outline: 3px solid var(--terra-400);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+h1,h2,h3,h4{ font-family: var(--serif); font-weight: 600; letter-spacing: -0.01em; line-height:1.15; color: var(--ink); margin: 0; }
+h1{ font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 500; }
+h2{ font-size: clamp(1.6rem, 3vw, 2.2rem); }
+h3{ font-size: 1.25rem; }
+p{ margin: 0 0 1rem; }
+.lead{ font-size: 1.15rem; color: var(--ink-soft); }
+
+.container{ width:100%; max-width: 1180px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* ============ HEADER ============ */
+.site-header{
+  position: sticky; top:0; z-index: 100;
+  background: rgba(251,246,239,.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.header-inner{
+  display:flex; align-items:center; justify-content: space-between;
+  padding: .9rem 0; gap: 2rem;
+}
+.brand{
+  display:flex; align-items:center; gap:.85rem;
+  text-decoration:none; color: var(--ink);
+}
+.brand:hover{ color: var(--ink); }
+.brand-mark{
+  width:46px; height:46px;
+  background: var(--terra-500);
+  color:#fff;
+  border-radius: 50%;
+  display:grid; place-items:center;
+  font-family: var(--serif); font-weight: 600;
+  font-size: 1.4rem;
+  box-shadow: var(--shadow-sm);
+  flex-shrink:0;
+}
+.brand-text{ display:flex; flex-direction:column; line-height:1.1; }
+.brand-name{ font-family: var(--serif); font-weight:600; font-size:1.15rem; }
+.brand-loc{ font-size:.8rem; color: var(--ink-soft); letter-spacing:.04em; text-transform: uppercase; }
+
+.nav-toggle{
+  display:none;
+  background: transparent; border: 1px solid var(--line);
+  width:42px; height:42px; border-radius: var(--radius-sm);
+  cursor:pointer; padding: 0;
+  align-items:center; justify-content:center;
+}
+.nav-toggle svg{ width:22px; height:22px; }
+
+.main-nav ul{
+  list-style:none; padding:0; margin:0;
+  display:flex; gap: .25rem;
+}
+.main-nav a{
+  display:inline-block;
+  padding: .55rem .9rem;
+  text-decoration:none;
+  color: var(--ink);
+  font-weight:500;
+  border-radius: var(--radius-sm);
+  font-size: .98rem;
+  transition: background .2s, color .2s;
+}
+.main-nav a:hover{ background: var(--sand-100); color: var(--terra-600); }
+.main-nav a.active{
+  background: var(--med-700); color: #fff;
+}
+.main-nav a.active:hover{ color:#fff; background: var(--med-600); }
+
+/* ============ SECTIONS ============ */
+.page{ display:none; }
+.page.is-active{ display:block; animation: fade .35s ease; }
+@keyframes fade{ from{ opacity:0; transform: translateY(6px); } to{ opacity:1; transform:none; } }
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;
+  padding: 5rem 0 4rem;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(207,110,74,.18), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 10% 80%, rgba(42,111,134,.14), transparent 70%),
+    var(--sand-50);
+  overflow: hidden;
+}
+.hero::before{
+  /* texture grain subtile */
+  content:"";
+  position:absolute; inset:0;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(184,84,47,.025) 0 1px, transparent 1px 8px);
+  pointer-events:none;
+}
+.hero-inner{
+  display:grid;
+  grid-template-columns: 1.15fr .95fr;
+  gap: 3.5rem; align-items: center;
+  position: relative;
+}
+.hero-eyebrow{
+  display:inline-flex; align-items:center; gap:.6rem;
+  font-size:.85rem; font-weight:600; letter-spacing:.12em;
+  text-transform: uppercase;
+  color: var(--terra-600);
+  margin-bottom: 1.25rem;
+}
+.hero-eyebrow::before{
+  content:""; width:32px; height:1.5px; background: var(--terra-500);
+}
+.hero h1 .accent{
+  font-style: italic;
+  color: var(--terra-500);
+  font-weight:400;
+}
+.hero p.lead{
+  margin-top: 1.5rem;
+  max-width: 36rem;
+}
+.hero-cta{
+  display:flex; gap:.85rem; flex-wrap:wrap;
+  margin-top: 2rem;
+}
+
+.btn{
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding: .85rem 1.4rem;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: .95rem;
+  border-radius: var(--radius);
+  text-decoration:none;
+  border: 1px solid transparent;
+  cursor:pointer;
+  transition: transform .15s, box-shadow .2s, background .2s, color .2s;
+}
+.btn-primary{
+  background: var(--terra-500); color:#fff;
+  box-shadow: var(--shadow-sm);
+}
+.btn-primary:hover{ background: var(--terra-600); color:#fff; transform: translateY(-1px); box-shadow: var(--shadow); }
+.btn-ghost{
+  background: transparent; color: var(--med-700);
+  border-color: var(--med-700);
+}
+.btn-ghost:hover{ background: var(--med-700); color:#fff; }
+.btn-sm{ padding: .55rem .9rem; font-size:.85rem; }
+
+/* Visuel hero illustré */
+.hero-visual{
+  position: relative;
+  aspect-ratio: 4/5;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--sand-100);
+  box-shadow: var(--shadow-lg);
+  transform: rotate(1.5deg);
+}
+.hero-visual svg{ width:100%; height:100%; display:block; }
+.hero-stamp{
+  position:absolute;
+  bottom: -1.2rem; left: -1.2rem;
+  background: var(--white);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-family: var(--serif);
+  transform: rotate(-3deg);
+  border: 1px solid var(--line);
+}
+.hero-stamp strong{ display:block; font-size:1.6rem; color: var(--terra-500); }
+.hero-stamp span{ font-size:.85rem; color: var(--ink-soft); font-family: var(--sans); }
+
+/* ============ SECTION GENERIQUE ============ */
+.section{ padding: 4.5rem 0; }
+.section-head{
+  text-align:center;
+  max-width: 42rem;
+  margin: 0 auto 3rem;
+}
+.section-head .eyebrow{
+  display:inline-block;
+  font-size:.8rem; font-weight:600; letter-spacing:.14em;
+  text-transform:uppercase; color: var(--med-600);
+  margin-bottom: .8rem;
+}
+.section-head h2{ margin-bottom: .75rem; }
+.section-head p{ color: var(--ink-soft); }
+
+/* ============ CARDS GRID ============ */
+.cards{
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.card{
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  transition: transform .25s, box-shadow .25s, border-color .25s;
+}
+.card:hover{
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+  border-color: var(--sand-300);
+}
+.card-icon{
+  width:48px; height:48px;
+  border-radius: 12px;
+  background: var(--sand-100);
+  color: var(--terra-500);
+  display:grid; place-items:center;
+  margin-bottom: 1.1rem;
+}
+.card-icon svg{ width:24px; height:24px; }
+.card h3{ margin-bottom: .5rem; }
+.card p{ color: var(--ink-soft); font-size:.95rem; margin: 0; }
+
+/* ============ ACCUEIL — Bandeau infos ============ */
+.facts{
+  display:grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  background: var(--med-700);
+  color:#fff;
+  border-radius: var(--radius-lg);
+  overflow:hidden;
+  margin: 0 auto;
+}
+.fact{
+  padding: 2rem 1.5rem;
+  text-align:center;
+  border-right: 1px solid rgba(255,255,255,.1);
+}
+.fact:last-child{ border-right:none; }
+.fact-num{
+  font-family: var(--serif); font-size: 2.4rem; font-weight: 500;
+  color: var(--sand-200);
+  line-height:1;
+  display:block; margin-bottom: .35rem;
+}
+.fact-label{ font-size:.9rem; letter-spacing:.04em; opacity:.85; }
+
+/* ============ ACTIVITES ============ */
+.activity-list{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
+  gap: 1.25rem;
+}
+.activity{
+  display:flex; gap: 1.25rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  align-items:flex-start;
+}
+.activity-pic{
+  flex-shrink:0;
+  width:72px; height:72px;
+  border-radius: 50%;
+  background: var(--sand-100);
+  display:grid; place-items:center;
+  color: var(--terra-500);
+}
+.activity-pic svg{ width:34px; height:34px; }
+.activity h3{ margin-bottom: .3rem; font-size:1.15rem; }
+.activity-meta{
+  font-size:.85rem; color: var(--med-600); font-weight:500;
+  margin-bottom:.5rem;
+}
+.activity p{ margin: 0; font-size:.93rem; color: var(--ink-soft); }
+
+/* ============ ACTUALITES ============ */
+.news-bar{
+  display:flex; flex-wrap:wrap; gap:1rem;
+  justify-content:space-between; align-items:center;
+  margin-bottom: 2.5rem;
+  padding: 1rem 1.5rem;
+  background: var(--sand-100);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
+.news-filter{
+  display:flex; gap:.4rem; flex-wrap:wrap;
+}
+.chip{
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: .4rem .9rem;
+  border-radius: 999px;
+  font-size: .85rem;
+  cursor:pointer;
+  font-family: var(--sans);
+  color: var(--ink);
+  transition: all .15s;
+}
+.chip:hover{ border-color: var(--terra-400); }
+.chip.is-active{
+  background: var(--med-700); color:#fff; border-color: var(--med-700);
+}
+
+.news-grid{
+  display:grid; grid-template-columns: repeat(auto-fill, minmax(320px,1fr));
+  gap: 1.5rem;
+}
+.news-card{
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow:hidden;
+  display:flex; flex-direction:column;
+  transition: transform .2s, box-shadow .2s;
+  position: relative;
+}
+.news-card:hover{ transform: translateY(-2px); box-shadow: var(--shadow); }
+.news-cover{
+  height: 180px;
+  background: linear-gradient(135deg, var(--sand-200), var(--sand-300));
+  position:relative;
+  display:grid; place-items:center;
+  color: var(--terra-600);
+}
+.news-cover svg{ width: 64px; height: 64px; opacity: .55; }
+.news-card.cat-evenement .news-cover{ background: linear-gradient(135deg, #f1c9b3, var(--terra-400)); color: #fff; }
+.news-card.cat-info .news-cover{ background: linear-gradient(135deg, #b9d3dc, var(--med-500)); color: #fff; }
+.news-card.cat-vie-quartier .news-cover{ background: linear-gradient(135deg, #d3dcb9, var(--olive-600)); color:#fff; }
+.news-cover.has-photo{
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.news-cover-large.has-photo{
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 280px;
+}
+
+.news-tag{
+  position:absolute; top: .9rem; left: .9rem;
+  background: rgba(255,255,255,.92);
+  color: var(--ink);
+  padding: .3rem .75rem; border-radius: 999px;
+  font-size: .75rem; font-weight: 600;
+  letter-spacing: .04em; text-transform: uppercase;
+}
+.news-body{
+  padding: 1.5rem;
+  display:flex; flex-direction:column; flex:1;
+}
+.news-date{
+  font-size:.8rem; color: var(--ink-soft);
+  margin-bottom: .4rem; letter-spacing:.04em;
+}
+.news-card h3{ margin-bottom:.5rem; font-size: 1.2rem; }
+.news-excerpt{ color: var(--ink-soft); font-size:.95rem; flex:1; margin-bottom: 1rem; }
+.news-actions{
+  display:flex; gap:.5rem; justify-content:space-between; align-items:center;
+}
+.news-link{
+  color: var(--terra-500); font-weight:600; font-size:.9rem;
+  text-decoration:none;
+}
+.news-link:hover{ color: var(--terra-600); text-decoration:underline; }
+.news-admin-tools{
+  display:flex; gap:.4rem;
+}
+.icon-btn{
+  background:transparent; border: 1px solid var(--line);
+  width:34px; height:34px; border-radius: var(--radius-sm);
+  cursor:pointer; display:grid; place-items:center;
+  color: var(--ink-soft);
+}
+.icon-btn:hover{ background: var(--sand-100); color: var(--terra-600); }
+.icon-btn svg{ width:16px; height:16px; }
+
+.empty-state{
+  text-align:center; padding: 3rem 1rem;
+  color: var(--ink-soft);
+  background: var(--white); border:1px dashed var(--line);
+  border-radius: var(--radius);
+}
+
+/* ============ ASSOCIATION ============ */
+.assoc-grid{
+  display:grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+  align-items: start;
+}
+.assoc-text h3{ margin: 1.75rem 0 .5rem; }
+.assoc-text h3:first-child{ margin-top: 0; }
+.assoc-side{
+  background: var(--white); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 2rem;
+  position: sticky; top: 6rem;
+}
+.assoc-side h3{ margin-bottom: 1rem; }
+.bureau{ list-style:none; padding:0; margin: 0 0 1.5rem; }
+.bureau li{
+  padding: .75rem 0; border-bottom: 1px dashed var(--line);
+  display:flex; justify-content:space-between; gap:1rem;
+}
+.bureau li:last-child{ border-bottom: none; }
+.bureau .role{ color: var(--ink-soft); font-size:.9rem; }
+.bureau .name{ font-weight:600; }
+
+/* ============ CONTACTS ============ */
+.contact-grid{
+  display:grid; grid-template-columns: 1fr 1fr; gap: 2.5rem;
+  align-items: start;
+}
+.contact-card{
+  background: var(--white); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 2rem;
+}
+.contact-list{ list-style:none; padding: 0; margin: 0; }
+.contact-list li{
+  display:flex; gap: 1rem; align-items:flex-start;
+  padding: 1rem 0; border-bottom: 1px dashed var(--line);
+}
+.contact-list li:last-child{ border-bottom:none; padding-bottom:0;}
+.contact-list li:first-child{ padding-top:0; }
+.contact-icon{
+  flex-shrink:0; width:42px; height:42px;
+  background: var(--sand-100); color: var(--terra-500);
+  border-radius: 50%; display:grid; place-items:center;
+}
+.contact-icon svg{ width: 20px; height:20px; }
+.contact-list strong{ display:block; font-size:.85rem; color: var(--ink-soft); font-weight:600; letter-spacing:.04em; text-transform:uppercase; margin-bottom:.15rem; }
+.contact-list a{ color: var(--ink); text-decoration:none; font-weight:500; }
+.contact-list a:hover{ color: var(--terra-500); }
+
+/* Form */
+.field{ margin-bottom: 1.25rem; }
+.field label{
+  display:block; font-size:.9rem; font-weight:600;
+  margin-bottom: .4rem; color: var(--ink);
+}
+.field input, .field textarea, .field select{
+  width:100%;
+  padding: .75rem .9rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-family: var(--sans); font-size: 1rem;
+  background: var(--white);
+  color: var(--ink);
+  transition: border-color .15s, box-shadow .15s;
+}
+.field input:focus, .field textarea:focus, .field select:focus{
+  border-color: var(--med-500);
+  box-shadow: 0 0 0 3px rgba(42,111,134,.15);
+  outline: none;
+}
+.field textarea{ resize: vertical; min-height: 120px; }
+.field-help{ font-size:.85rem; color: var(--ink-soft); margin-top:.3rem; }
+
+/* ============ FOOTER ============ */
+.site-footer{
+  background: var(--med-700);
+  color: var(--sand-100);
+  padding: 3.5rem 0 1.5rem;
+  margin-top: 4rem;
+}
+.footer-grid{
+  display:grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+.site-footer h4{
+  color:#fff; font-family: var(--serif); font-size: 1.05rem;
+  margin-bottom: 1rem; font-weight: 600;
+}
+.site-footer ul{ list-style:none; padding:0; margin:0; }
+.site-footer ul li{ margin-bottom: .5rem; }
+.site-footer a{
+  color: var(--sand-200); text-decoration:none; font-size: .92rem;
+}
+.site-footer a:hover{ color: #fff; text-decoration: underline; }
+.footer-brand p{ font-size:.92rem; color: var(--sand-200); }
+.social{
+  display:flex; gap:.6rem; margin-top: 1rem;
+}
+.social a{
+  width:40px; height:40px; border-radius:50%;
+  background: rgba(255,255,255,.08);
+  display:grid; place-items:center;
+}
+.social a:hover{ background: var(--terra-500); }
+.social svg{ width: 18px; height:18px; color:#fff; }
+.copyright{
+  border-top: 1px solid rgba(255,255,255,.12);
+  padding-top: 1.5rem;
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem;
+  font-size: .85rem; color: var(--sand-200);
+}
+.copyright a{ color: var(--sand-200); }
+
+/* ============ MODAL ============ */
+.modal{
+  position: fixed; inset: 0;
+  background: rgba(22,62,77,.65);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 1.5rem;
+  animation: fadeIn .25s ease;
+}
+.modal.is-open{ display:flex; }
+@keyframes fadeIn{ from{ opacity:0; } to{ opacity:1; } }
+.modal-box{
+  background: var(--sand-50);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  animation: slideUp .3s ease;
+}
+@keyframes slideUp{ from{ transform: translateY(20px); opacity:0; } to{ transform:none; opacity:1; }}
+.modal-head{
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--line);
+  display:flex; justify-content:space-between; align-items:center;
+  position:sticky; top:0; background: var(--sand-50); z-index:1;
+}
+.modal-head h3{ margin: 0; }
+.modal-close{
+  background: transparent; border: none; cursor: pointer;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  color: var(--ink);
+}
+.modal-close:hover{ background: var(--sand-200); }
+.modal-body{ padding: 2rem; }
+
+/* Admin badge */
+.admin-banner{
+  background: var(--terra-500); color:#fff;
+  text-align:center; padding: .65rem 1rem;
+  font-size: .9rem; font-weight: 500;
+  display: none;
+  align-items:center; justify-content:center; gap:1rem;
+}
+body.admin .admin-banner{ display:flex; }
+body.admin .admin-only{ display: inline-flex !important; }
+.admin-only{ display: none !important; }
+.admin-banner button{
+  background: rgba(255,255,255,.2);
+  color: #fff; border: 1px solid rgba(255,255,255,.4);
+  padding: .25rem .8rem; border-radius: var(--radius-sm);
+  cursor:pointer; font-size: .85rem; font-family: var(--sans);
+}
+.admin-banner button:hover{ background: rgba(255,255,255,.3); }
+
+/* News detail */
+.news-detail h2{ margin-bottom: .5rem; }
+.news-detail .news-date{ margin-bottom: 1.5rem; }
+.news-detail .news-cover-large{
+  height: 220px; border-radius: var(--radius);
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, var(--sand-200), var(--sand-300));
+  display:grid; place-items:center;
+  color: var(--terra-600);
+}
+.news-detail .news-cover-large svg{ width: 80px; height: 80px; opacity: .5; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px){
+  .hero-inner{ grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero-visual{ max-width: 360px; margin: 0 auto; }
+  .assoc-grid, .contact-grid{ grid-template-columns: 1fr; gap: 2rem; }
+  .assoc-side{ position: static; }
+  .footer-grid{ grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .facts{ grid-template-columns: 1fr 1fr; }
+  .fact:nth-child(2){ border-right:none; }
+  .fact:nth-child(1), .fact:nth-child(2){ border-bottom: 1px solid rgba(255,255,255,.1); }
+}
+
+@media (max-width: 720px){
+  .nav-toggle{ display:inline-flex; }
+  .main-nav{
+    position: absolute; top: 100%; left:0; right: 0;
+    background: var(--sand-50);
+    border-bottom: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    display: none;
+  }
+  .main-nav.is-open{ display:block; }
+  .main-nav ul{
+    flex-direction: column; padding: 1rem;
+  }
+  .main-nav a{ display:block; padding: .75rem 1rem; }
+  .section{ padding: 3rem 0; }
+  .hero{ padding: 3rem 0; }
+  .footer-grid{ grid-template-columns: 1fr; }
+  .news-bar{ flex-direction:column; align-items: stretch; }
+}
+
+@media (max-width: 460px){
+  .facts{ grid-template-columns: 1fr; }
+  .fact{ border-right: none !important; border-bottom: 1px solid rgba(255,255,255,.1); }
+  .fact:last-child{ border-bottom:none; }
+  .container{ padding: 0 1.1rem; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  html{ scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Aller au contenu principal</a>
+
+<div class="admin-banner" role="status">
+  <span>🔓 Mode administrateur activé</span>
+  <button onclick="resetDemoData()">Réinitialiser la démo</button>
+  <button onclick="logoutAdmin()">Se déconnecter</button>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#" class="brand" data-page="accueil">
+      <span class="brand-mark" aria-hidden="true">B</span>
+      <span class="brand-text">
+        <span class="brand-name">Le Barrou</span>
+        <span class="brand-loc">Sète · Quartier</span>
+      </span>
+    </a>
+
+    <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" onclick="toggleNav()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+
+    <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
+      <ul>
+        <li><a href="#" data-page="accueil" class="active">Accueil</a></li>
+        <li><a href="#" data-page="activites">Activités</a></li>
+        <li><a href="#" data-page="actualites">Actualités</a></li>
+        <li><a href="#" data-page="association">Association</a></li>
+        <li><a href="#" data-page="contacts">Contacts</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ ACCUEIL ============ -->
+<section class="page is-active" id="page-accueil">
+
+  <div class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <span class="hero-eyebrow">Bienvenue à Sète</span>
+        <h1>Le quartier du <span class="accent">Barrou</span>, vivant&nbsp;et solidaire.</h1>
+        <p class="lead">Notre association anime la vie de quartier au bord de l'étang de Thau&nbsp;: rencontres, animations, défense de notre cadre de vie et projets partagés depuis plus de quarante ans.</p>
+        <div class="hero-cta">
+          <a href="#" class="btn btn-primary" data-page="association">
+            Rejoindre l'association
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#" class="btn btn-ghost" data-page="actualites">Voir les actualités</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <!-- Illustration vectorielle: étang de Thau + barques -->
+        <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#f5ecdd"/>
+              <stop offset="60%" stop-color="#ead8bb"/>
+              <stop offset="100%" stop-color="#cf6e4a"/>
+            </linearGradient>
+            <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#2a6f86"/>
+              <stop offset="100%" stop-color="#163e4d"/>
+            </linearGradient>
+          </defs>
+          <rect width="400" height="500" fill="url(#sky)"/>
+          <!-- Soleil -->
+          <circle cx="290" cy="170" r="55" fill="#fbf6ef" opacity="0.9"/>
+          <circle cx="290" cy="170" r="55" fill="#cf6e4a" opacity="0.3"/>
+          <!-- Collines lointaines -->
+          <path d="M0 300 Q 100 270 180 285 T 400 290 L400 320 L0 320 Z" fill="#9a4322" opacity="0.4"/>
+          <!-- Eau -->
+          <rect x="0" y="305" width="400" height="195" fill="url(#water)"/>
+          <!-- Reflets -->
+          <path d="M40 360 L100 360" stroke="#ead8bb" stroke-width="1.5" opacity="0.5"/>
+          <path d="M150 380 L240 380" stroke="#ead8bb" stroke-width="1.5" opacity="0.5"/>
+          <path d="M60 410 L130 410" stroke="#ead8bb" stroke-width="1.5" opacity="0.4"/>
+          <path d="M250 420 L340 420" stroke="#ead8bb" stroke-width="1.5" opacity="0.4"/>
+          <path d="M30 450 L100 450" stroke="#ead8bb" stroke-width="1.5" opacity="0.3"/>
+          <!-- Tables conchylicoles -->
+          <g stroke="#2a2018" stroke-width="2" opacity="0.5">
+            <line x1="30" y1="335" x2="180" y2="335"/>
+            <line x1="220" y1="345" x2="370" y2="345"/>
+            <line x1="40" y1="335" x2="40" y2="345"/>
+            <line x1="80" y1="335" x2="80" y2="345"/>
+            <line x1="120" y1="335" x2="120" y2="345"/>
+            <line x1="160" y1="335" x2="160" y2="345"/>
+            <line x1="240" y1="345" x2="240" y2="355"/>
+            <line x1="280" y1="345" x2="280" y2="355"/>
+            <line x1="320" y1="345" x2="320" y2="355"/>
+          </g>
+          <!-- Barque -->
+          <g transform="translate(120, 380)">
+            <path d="M0 0 Q 25 18 50 0 L45 8 L5 8 Z" fill="#2a2018"/>
+            <line x1="25" y1="0" x2="25" y2="-30" stroke="#2a2018" stroke-width="2"/>
+            <path d="M25 -30 L25 -10 L40 -15 Z" fill="#fbf6ef" opacity="0.95"/>
+          </g>
+          <!-- Mouettes -->
+          <path d="M80 130 q 6 -8 12 0 q 6 -8 12 0" stroke="#2a2018" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M150 100 q 5 -6 10 0 q 5 -6 10 0" stroke="#2a2018" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M210 145 q 4 -5 8 0 q 4 -5 8 0" stroke="#2a2018" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        </svg>
+        <div class="hero-stamp">
+          <strong>40+</strong>
+          <span>années d'engagement</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Notre raison d'être</span>
+        <h2>Faire vivre le quartier, ensemble</h2>
+        <p>Une association ouverte à toutes et tous les habitants du Barrou, attachés à leur quartier et à son avenir.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Animer la vie locale</h3>
+          <p>Fêtes, repas de quartier, rencontres et moments conviviaux qui rapprochent les voisins toute l'année.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3>Défendre le cadre de vie</h3>
+          <p>Représenter les habitants auprès des institutions et veiller au respect de notre environnement et de nos espaces partagés.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3>Informer en continu</h3>
+          <p>Tenir informés les adhérents des projets, travaux, et événements qui concernent le quartier.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <h3>Proposer des activités</h3>
+          <p>Sorties, ateliers, rencontres culturelles : un programme régulier pour petits et grands.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="facts" role="region" aria-label="Chiffres-clés">
+        <div class="fact"><span class="fact-num">+40</span><span class="fact-label">années d'existence</span></div>
+        <div class="fact"><span class="fact-num">230</span><span class="fact-label">familles adhérentes</span></div>
+        <div class="fact"><span class="fact-num">12</span><span class="fact-label">événements par an</span></div>
+        <div class="fact"><span class="fact-num">100%</span><span class="fact-label">bénévole</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">À ne pas manquer</span>
+        <h2>Dernières actualités</h2>
+        <p>Les dernières nouvelles du quartier et de l'association.</p>
+      </div>
+      <div class="news-grid" id="news-grid-home"></div>
+      <div style="text-align:center; margin-top: 2.5rem;">
+        <a href="#" class="btn btn-ghost" data-page="actualites">Toutes les actualités</a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============ ACTIVITES ============ -->
+<section class="page" id="page-activites">
+  <div class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Programme</span>
+        <h2>Nos activités</h2>
+        <p>Tout au long de l'année, l'association propose des moments de rencontre et de partage ouverts à tous les adhérents.</p>
+      </div>
+
+      <div class="activity-list">
+        <article class="activity">
+          <div class="activity-pic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div>
+            <h3>Repas de quartier</h3>
+            <div class="activity-meta">Plusieurs fois par an</div>
+            <p>Notre temps fort de l'année : grande tablée conviviale entre voisins, dans la rue ou sur l'esplanade selon la saison.</p>
+          </div>
+        </article>
+
+        <article class="activity">
+          <div class="activity-pic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div>
+            <h3>Sorties &amp; excursions</h3>
+            <div class="activity-meta">Printemps · Automne</div>
+            <p>Découverte de la région : journées en car vers les villages perchés, marchés de pays, sites naturels du Languedoc.</p>
+          </div>
+        </article>
+
+        <article class="activity">
+          <div class="activity-pic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <div>
+            <h3>Ateliers &amp; rencontres</h3>
+            <div class="activity-meta">Toute l'année</div>
+            <p>Causeries, ateliers thématiques, présentations d'auteurs locaux, échanges autour du patrimoine sétois.</p>
+          </div>
+        </article>
+
+        <article class="activity">
+          <div class="activity-pic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <div>
+            <h3>Marche &amp; bien-être</h3>
+            <div class="activity-meta">Mardis matin</div>
+            <p>Sorties pédestres autour de l'étang de Thau et du Mont Saint-Clair, ouvertes à tous les niveaux.</p>
+          </div>
+        </article>
+
+        <article class="activity">
+          <div class="activity-pic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div>
+            <h3>Vœux &amp; galette</h3>
+            <div class="activity-meta">Janvier</div>
+            <p>Le rendez-vous incontournable de la nouvelle année : galette des rois et présentation du programme à venir.</p>
+          </div>
+        </article>
+
+        <article class="activity">
+          <div class="activity-pic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div>
+            <h3>Vide-greniers</h3>
+            <div class="activity-meta">Mai · Septembre</div>
+            <p>Deux grandes journées dans l'année pour vendre, chiner et faire de bonnes affaires entre habitants du quartier.</p>
+          </div>
+        </article>
+      </div>
+
+      <div style="margin-top: 3rem; padding: 2rem; background: var(--sand-100); border-radius: var(--radius); border-left: 4px solid var(--terra-500);">
+        <h3 style="margin-bottom: .5rem;">Bon à savoir</h3>
+        <p style="margin: 0; color: var(--ink-soft);">La plupart des activités sont réservées aux adhérents à jour de cotisation. Le bulletin d'adhésion est téléchargeable sur la page Association, ou disponible auprès du bureau.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACTUALITES ============ -->
+<section class="page" id="page-actualites">
+  <div class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Le fil du quartier</span>
+        <h2>Actualités</h2>
+        <p>Restez informés des projets, événements et nouveautés qui rythment la vie du Barrou.</p>
+      </div>
+
+      <div class="news-bar">
+        <div class="news-filter" role="group" aria-label="Filtrer par catégorie">
+          <button class="chip is-active" data-filter="all">Toutes</button>
+          <button class="chip" data-filter="evenement">Événements</button>
+          <button class="chip" data-filter="info">Informations</button>
+          <button class="chip" data-filter="vie-quartier">Vie du quartier</button>
+        </div>
+
+        <div style="display:flex; gap:.5rem;">
+          <button class="btn btn-ghost btn-sm admin-only" onclick="openNewsEditor()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Nouvelle annonce
+          </button>
+          <button class="btn btn-ghost btn-sm" id="adminBtn" onclick="openAdminLogin()" title="Espace administrateur">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Admin
+          </button>
+        </div>
+      </div>
+
+      <div class="news-grid" id="news-grid-full"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ASSOCIATION ============ -->
+<section class="page" id="page-association">
+  <div class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Qui sommes-nous</span>
+        <h2>L'association</h2>
+        <p>Une équipe de bénévoles habitants du quartier, au service du lien social et du bien-vivre ensemble.</p>
+      </div>
+
+      <div class="assoc-grid">
+        <div class="assoc-text">
+          <h3>Notre histoire</h3>
+          <p>Créée dans les années 1980 à l'initiative de quelques familles installées au Barrou, l'association est née du désir simple de mieux se connaître entre voisins et de défendre les intérêts du quartier auprès des institutions sétoises.</p>
+          <p>Au fil des décennies, l'association est devenue un acteur reconnu de la vie locale, organisateur d'événements appréciés et interlocuteur régulier de la mairie sur tous les sujets qui touchent à la vie du quartier.</p>
+
+          <h3>Nos missions</h3>
+          <p>Représenter et défendre les intérêts du quartier ; animer la vie locale par des événements ouverts à tous les adhérents ; informer les habitants sur les projets municipaux et travaux concernant le Barrou ; entretenir le lien intergénérationnel entre voisins.</p>
+
+          <h3>Comment adhérer&nbsp;?</h3>
+          <p>L'adhésion est ouverte à tous les habitants du quartier et amis du Barrou. Elle se fait par bulletin d'inscription disponible auprès du bureau ou téléchargeable ci-dessous. La cotisation annuelle permet de couvrir les frais de fonctionnement et de soutenir nos actions.</p>
+
+          <a href="#" class="btn btn-primary" onclick="alert('En production, ce bouton téléchargerait le bulletin d\\'inscription au format PDF.'); return false;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Télécharger le bulletin d'adhésion
+          </a>
+        </div>
+
+        <aside class="assoc-side">
+          <h3>Le bureau</h3>
+          <ul class="bureau">
+            <li><span class="role">Présidence</span><span class="name">Marie L.</span></li>
+            <li><span class="role">Vice-présidence</span><span class="name">Jean-Pierre M.</span></li>
+            <li><span class="role">Secrétariat</span><span class="name">Sylvie R.</span></li>
+            <li><span class="role">Trésorerie</span><span class="name">Robert T.</span></li>
+          </ul>
+
+          <h3>Permanences</h3>
+          <p style="font-size: .95rem; color: var(--ink-soft);">Le bureau se réunit tous les premiers mardis du mois. Les adhérents peuvent prendre contact à tout moment via la page Contacts.</p>
+
+          <h3 style="margin-top: 1.5rem;">Statuts</h3>
+          <p style="font-size: .95rem; color: var(--ink-soft);">Association loi 1901 déclarée à la sous-préfecture de Béziers, à but non lucratif et apolitique.</p>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTS ============ -->
+<section class="page" id="page-contacts">
+  <div class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Restons en contact</span>
+        <h2>Nous joindre</h2>
+        <p>Une question ? Une idée ? L'envie de rejoindre l'aventure ? L'équipe vous répond avec plaisir.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3>Coordonnées</h3>
+          <ul class="contact-list">
+            <li>
+              <div class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <strong>Téléphone</strong>
+                <a href="tel:+33000000000">À demander auprès du bureau</a>
+              </div>
+            </li>
+            <li>
+              <div class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <strong>Courriel</strong>
+                <a href="mailto:contact@lebarrou34.com">contact@lebarrou34.com</a>
+              </div>
+            </li>
+            <li>
+              <div class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <strong>Adresse postale</strong>
+                Quartier du Barrou<br>34200 Sète
+              </div>
+            </li>
+            <li>
+              <div class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </div>
+              <div>
+                <strong>Réseaux sociaux</strong>
+                <a href="https://www.facebook.com/assolebarrouofficiel" target="_blank" rel="noopener">Suivez-nous sur Facebook</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="contact-card">
+          <h3>Écrivez-nous</h3>
+          <form onsubmit="handleContact(event)">
+            <div class="field">
+              <label for="cf-name">Votre nom</label>
+              <input type="text" id="cf-name" name="name" required autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="cf-email">Votre courriel</label>
+              <input type="email" id="cf-email" name="email" required autocomplete="email">
+            </div>
+            <div class="field">
+              <label for="cf-subject">Sujet</label>
+              <select id="cf-subject" name="subject">
+                <option>Demande d'information</option>
+                <option>Adhésion</option>
+                <option>Suggestion / idée</option>
+                <option>Autre</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="cf-message">Votre message</label>
+              <textarea id="cf-message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
+              Envoyer le message
+            </button>
+            <p class="field-help" style="margin-top:1rem; text-align:center;">Nous vous répondrons sous 7 jours.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>Le Barrou — Sète</h4>
+        <p>Association de quartier dédiée à l'animation et à la défense du cadre de vie au bord de l'étang de Thau.</p>
+        <div class="social">
+          <a href="https://www.facebook.com/assolebarrouofficiel" aria-label="Facebook" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+          </a>
+          <a href="mailto:contact@lebarrou34.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="#" data-page="accueil">Accueil</a></li>
+          <li><a href="#" data-page="activites">Activités</a></li>
+          <li><a href="#" data-page="actualites">Actualités</a></li>
+          <li><a href="#" data-page="association">Association</a></li>
+          <li><a href="#" data-page="contacts">Contacts</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Pratique</h4>
+        <ul>
+          <li><a href="#" data-page="association">Adhérer</a></li>
+          <li><a href="#" data-page="contacts">Nous contacter</a></li>
+          <li><a href="#" onclick="openAdminLogin(); return false;">Espace admin</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Mentions</h4>
+        <ul>
+          <li><a href="#" onclick="alert('Page à compléter.'); return false;">Mentions légales</a></li>
+          <li><a href="#" onclick="alert('Page à compléter.'); return false;">Politique de confidentialité</a></li>
+          <li><a href="#" onclick="alert('Page à compléter.'); return false;">Accessibilité</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <span>© <span id="year"></span> Association du Quartier du Barrou — Sète</span>
+      <span>Site refondu avec ❤️ pour le quartier</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ MODAL Admin login ============ -->
+<div class="modal" id="modal-admin" role="dialog" aria-labelledby="adminTitle" aria-modal="true">
+  <div class="modal-box" style="max-width:440px;">
+    <div class="modal-head">
+      <h3 id="adminTitle">Espace administrateur</h3>
+      <button class="modal-close" onclick="closeModal('modal-admin')" aria-label="Fermer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <p style="color: var(--ink-soft); margin-bottom: 1.5rem;">Connectez-vous pour publier ou gérer les annonces. Le mot de passe de démonstration est <code style="background: var(--sand-200); padding: 2px 6px; border-radius: 4px;">barrou2026</code>.</p>
+      <form onsubmit="handleAdminLogin(event)">
+        <div class="field">
+          <label for="admin-pwd">Mot de passe</label>
+          <input type="password" id="admin-pwd" required autocomplete="current-password">
+        </div>
+        <div id="admin-error" style="color: var(--terra-600); font-size: .9rem; margin-bottom: 1rem; display:none;">Mot de passe incorrect.</div>
+        <button class="btn btn-primary" type="submit" style="width:100%; justify-content:center;">Se connecter</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MODAL Editor ============ -->
+<div class="modal" id="modal-editor" role="dialog" aria-labelledby="editorTitle" aria-modal="true">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="editorTitle">Nouvelle annonce</h3>
+      <button class="modal-close" onclick="closeModal('modal-editor')" aria-label="Fermer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <form onsubmit="saveNews(event)">
+        <input type="hidden" id="news-id">
+        <div class="field">
+          <label for="news-title">Titre de l'annonce *</label>
+          <input type="text" id="news-title" required maxlength="120">
+        </div>
+        <div class="field">
+          <label for="news-cat">Catégorie *</label>
+          <select id="news-cat" required>
+            <option value="evenement">Événement</option>
+            <option value="info">Information</option>
+            <option value="vie-quartier">Vie du quartier</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="news-date">Date *</label>
+          <input type="date" id="news-date" required>
+        </div>
+        <div class="field">
+          <label for="news-excerpt">Résumé court (1-2 phrases) *</label>
+          <textarea id="news-excerpt" required maxlength="220" style="min-height: 80px;"></textarea>
+          <div class="field-help">Affiché sur la liste des actualités.</div>
+        </div>
+        <div class="field">
+          <label for="news-image">Photo (optionnel)</label>
+          <input type="file" id="news-image" accept="image/*" onchange="handleImageUpload(event)">
+          <div class="field-help">JPG ou PNG. Automatiquement redimensionnée pour l'affichage web.</div>
+          <div id="image-preview" style="margin-top: .85rem;"></div>
+        </div>
+        <div class="field">
+          <label for="news-body">Contenu complet</label>
+          <textarea id="news-body" style="min-height: 200px;"></textarea>
+          <div class="field-help">Vous pouvez écrire plusieurs paragraphes (séparés par une ligne vide).</div>
+        </div>
+        <div style="display:flex; gap:.75rem; justify-content:flex-end;">
+          <button type="button" class="btn btn-ghost" onclick="closeModal('modal-editor')">Annuler</button>
+          <button type="submit" class="btn btn-primary">Publier</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MODAL News detail ============ -->
+<div class="modal" id="modal-news-view" role="dialog" aria-labelledby="newsViewTitle" aria-modal="true">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="newsViewTitle">Détail de l'annonce</h3>
+      <button class="modal-close" onclick="closeModal('modal-news-view')" aria-label="Fermer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body" id="news-view-content"></div>
+  </div>
+</div>
+
+<script>
+/* =====================================================
+   ÉTAT & DONNÉES
+   ===================================================== */
+
+const ADMIN_PASSWORD = 'barrou2026';
+let isAdmin = false;
+let currentFilter = 'all';
+
+// Contenu de démonstration par défaut. Les modifications de l'admin
+// sont conservées dans le navigateur (localStorage). En production,
+// remplacer par des appels à une vraie API.
+const STORAGE_KEY = 'lebarrou34-news-v1';
+
+const DEFAULT_NEWS = [
+  {
+    id: 1,
+    title: "Repas de quartier — édition d'été",
+    category: "evenement",
+    date: "2026-06-15",
+    excerpt: "Notre grande tablée annuelle revient sur l'esplanade. Inscriptions ouvertes jusqu'au 5 juin.",
+    body: "C'est le rendez-vous incontournable de la saison ! Le repas de quartier d'été se tiendra le samedi 15 juin à partir de 19h sur l'esplanade du Barrou.\n\nAu menu cette année : grillades de poissons de l'étang, salades fraîches du jardin, et bien sûr les desserts faits maison de nos adhérent·es. Un orchestre local nous accompagnera en seconde partie de soirée.\n\nParticipation libre pour les adhérents. Inscriptions auprès du bureau ou par mail jusqu'au 5 juin pour faciliter l'organisation."
+  },
+  {
+    id: 2,
+    title: "Travaux voirie chemin du Barrou",
+    category: "info",
+    date: "2026-04-22",
+    excerpt: "La municipalité programme la réfection du revêtement de mai à juillet. Détails et déviations.",
+    body: "La mairie de Sète nous a informés du calendrier des travaux de réfection du chemin du Barrou, prévus du 12 mai au 18 juillet 2026.\n\nLe chantier se déroulera en trois phases pour limiter la gêne aux riverains. Une réunion publique est prévue le 28 avril à 18h en salle du conseil pour répondre à vos questions.\n\nPendant les travaux, des déviations seront mises en place — un plan détaillé sera distribué dans les boîtes aux lettres début mai."
+  },
+  {
+    id: 3,
+    title: "Nouvelle compagnie au théâtre Molière",
+    category: "vie-quartier",
+    date: "2026-03-30",
+    excerpt: "Une troupe locale s'installe et propose des ateliers ouverts aux habitants du Barrou.",
+    body: "Bonne nouvelle pour les amateurs de théâtre : la compagnie « Voiles &amp; Tréteaux » s'installe pour la saison au théâtre Molière, à deux pas du quartier.\n\nLa troupe propose des ateliers d'initiation pour adultes les jeudis soirs, ainsi qu'une formule jeune public le mercredi après-midi. Tarifs préférentiels pour les adhérents de l'association."
+  },
+  {
+    id: 4,
+    title: "Vide-greniers de printemps",
+    category: "evenement",
+    date: "2026-05-04",
+    excerpt: "Réservez votre emplacement pour le vide-greniers du dimanche 4 mai. Tarif réduit pour adhérents.",
+    body: "Le traditionnel vide-greniers de printemps aura lieu le dimanche 4 mai 2026, de 8h à 17h, le long du chemin du Barrou.\n\nLes inscriptions sont ouvertes : 10€ les 3 mètres pour les adhérents, 15€ pour les non-adhérents. Buvette tenue par l'association sur place. Bulletin disponible auprès du bureau."
+  },
+  {
+    id: 5,
+    title: "Assemblée générale annuelle",
+    category: "info",
+    date: "2026-02-08",
+    excerpt: "Bilan moral, financier et élection du nouveau bureau. Présence des adhérents souhaitée.",
+    body: "L'assemblée générale ordinaire se tiendra le samedi 8 février 2026 à 10h, salle des fêtes du quartier.\n\nOrdre du jour : rapport moral, rapport financier, projets 2026, élection des membres du bureau, questions diverses. Un pot de l'amitié clôturera la matinée."
+  }
+];
+
+let news = [];
+let nextId = 6;
+
+/* Persistance dans le navigateur (localStorage) */
+function persistNews(){
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(news));
+  } catch(e){
+    console.warn('Stockage local indisponible :', e);
+  }
+}
+
+function loadStoredNews(){
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      if(Array.isArray(parsed)){
+        news = parsed;
+        nextId = parsed.length
+          ? Math.max(...parsed.map(n => n.id)) + 1
+          : 1;
+        return;
+      }
+    }
+  } catch(e){
+    console.warn('Lecture stockage impossible :', e);
+  }
+  // Premier chargement ou stockage vide : on part des annonces d'exemple.
+  news = DEFAULT_NEWS.map(n => ({ ...n }));
+  nextId = Math.max(...news.map(n => n.id)) + 1;
+  persistNews();
+}
+
+function resetDemoData(){
+  if(!confirm('Réinitialiser les annonces avec le contenu d\'exemple ? Vos annonces personnalisées seront perdues.')) return;
+  news = DEFAULT_NEWS.map(n => ({ ...n }));
+  nextId = Math.max(...news.map(n => n.id)) + 1;
+  persistNews();
+  renderNews();
+}
+
+/* =====================================================
+   GESTION DES IMAGES
+   ===================================================== */
+
+let currentImage = null; // base64 de l'image en cours d'édition
+
+function handleImageUpload(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  if(!file.type.startsWith('image/')){
+    alert('Veuillez sélectionner une image.');
+    return;
+  }
+  resizeImage(file, 1200, 0.82)
+    .then(dataUrl => {
+      currentImage = dataUrl;
+      showImagePreview(dataUrl);
+    })
+    .catch(() => alert('Impossible de charger cette image.'));
+}
+
+function showImagePreview(dataUrl){
+  document.getElementById('image-preview').innerHTML = `
+    <div style="position:relative; display:inline-block; max-width:100%;">
+      <img src="${dataUrl}" alt="Aperçu" style="max-width:100%; max-height:220px; border-radius: var(--radius-sm); display:block; border:1px solid var(--line);">
+      <button type="button" onclick="removeImage()" style="position:absolute; top:.4rem; right:.4rem; background: rgba(0,0,0,.65); color:#fff; border:none; width:30px; height:30px; border-radius:50%; cursor:pointer; font-size:1rem;" aria-label="Retirer l'image">×</button>
+    </div>`;
+}
+
+function removeImage(){
+  currentImage = null;
+  document.getElementById('news-image').value = '';
+  document.getElementById('image-preview').innerHTML = '';
+}
+
+function resizeImage(file, maxDim, quality){
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const img = new Image();
+      img.onload = () => {
+        let { width, height } = img;
+        if(width > maxDim || height > maxDim){
+          if(width > height){
+            height = Math.round(height * maxDim / width);
+            width = maxDim;
+          } else {
+            width = Math.round(width * maxDim / height);
+            height = maxDim;
+          }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.onerror = reject;
+      img.src = ev.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+/* =====================================================
+   NAVIGATION ENTRE PAGES
+   ===================================================== */
+
+function showPage(pageName){
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('is-active'));
+  const page = document.getElementById('page-' + pageName);
+  if(page) page.classList.add('is-active');
+
+  // Met à jour le menu actif
+  document.querySelectorAll('.main-nav a').forEach(a => {
+    a.classList.toggle('active', a.dataset.page === pageName);
+  });
+
+  // Ferme le menu mobile
+  const nav = document.getElementById('main-nav');
+  nav.classList.remove('is-open');
+  document.querySelector('.nav-toggle').setAttribute('aria-expanded', 'false');
+
+  // Scroll vers le haut
+  window.scrollTo({ top:0, behavior: 'instant' });
+}
+
+document.addEventListener('click', e => {
+  const link = e.target.closest('[data-page]');
+  if(link){
+    e.preventDefault();
+    showPage(link.dataset.page);
+  }
+});
+
+function toggleNav(){
+  const nav = document.getElementById('main-nav');
+  const btn = document.querySelector('.nav-toggle');
+  const isOpen = nav.classList.toggle('is-open');
+  btn.setAttribute('aria-expanded', String(isOpen));
+}
+
+/* =====================================================
+   AFFICHAGE DES ACTUALITÉS
+   ===================================================== */
+
+const CAT_LABELS = {
+  'evenement': 'Événement',
+  'info': 'Information',
+  'vie-quartier': 'Vie du quartier'
+};
+
+const CAT_ICONS = {
+  'evenement': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+  'info': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>',
+  'vie-quartier': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>'
+};
+
+function formatDate(iso){
+  const d = new Date(iso);
+  return d.toLocaleDateString('fr-FR', { day:'numeric', month:'long', year:'numeric' });
+}
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, m =>
+    ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])
+  );
+}
+
+function renderNews(){
+  const sorted = [...news].sort((a,b) => b.date.localeCompare(a.date));
+  const filtered = currentFilter === 'all'
+    ? sorted
+    : sorted.filter(n => n.category === currentFilter);
+
+  // Page actualités complète
+  const fullEl = document.getElementById('news-grid-full');
+  if(filtered.length === 0){
+    fullEl.innerHTML = '<div class="empty-state" style="grid-column: 1/-1;">Aucune actualité dans cette catégorie pour le moment.</div>';
+  } else {
+    fullEl.innerHTML = filtered.map(newsCardHtml).join('');
+  }
+
+  // Aperçu sur l'accueil — 3 dernières
+  const homeEl = document.getElementById('news-grid-home');
+  homeEl.innerHTML = sorted.slice(0,3).map(newsCardHtml).join('');
+}
+
+function newsCardHtml(n){
+  const adminTools = isAdmin ? `
+    <div class="news-admin-tools">
+      <button class="icon-btn" onclick="event.stopPropagation(); editNews(${n.id})" title="Modifier">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </button>
+      <button class="icon-btn" onclick="event.stopPropagation(); deleteNews(${n.id})" title="Supprimer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+      </button>
+    </div>` : '';
+
+  const cover = n.image
+    ? `<div class="news-cover has-photo" style="background-image: url('${n.image}');">
+         <span class="news-tag">${CAT_LABELS[n.category]}</span>
+       </div>`
+    : `<div class="news-cover">
+         ${CAT_ICONS[n.category] || ''}
+         <span class="news-tag">${CAT_LABELS[n.category]}</span>
+       </div>`;
+
+  return `
+    <article class="news-card cat-${n.category}" onclick="viewNews(${n.id})" style="cursor:pointer;">
+      ${cover}
+      <div class="news-body">
+        <div class="news-date">${formatDate(n.date)}</div>
+        <h3>${escapeHtml(n.title)}</h3>
+        <p class="news-excerpt">${escapeHtml(n.excerpt)}</p>
+        <div class="news-actions">
+          <span class="news-link">Lire la suite →</span>
+          ${adminTools}
+        </div>
+      </div>
+    </article>`;
+}
+
+/* =====================================================
+   FILTRES
+   ===================================================== */
+
+document.querySelectorAll('.chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('is-active'));
+    chip.classList.add('is-active');
+    currentFilter = chip.dataset.filter;
+    renderNews();
+  });
+});
+
+/* =====================================================
+   VISUALISATION D'UNE NEWS
+   ===================================================== */
+
+function viewNews(id){
+  const n = news.find(x => x.id === id);
+  if(!n) return;
+
+  const paragraphs = n.body.split(/\n\n+/).map(p =>
+    `<p>${escapeHtml(p).replace(/\n/g, '<br>')}</p>`
+  ).join('');
+
+  const coverLarge = n.image
+    ? `<div class="news-cover-large has-photo" style="background-image: url('${n.image}');"></div>`
+    : `<div class="news-cover-large">${CAT_ICONS[n.category] || ''}</div>`;
+
+  document.getElementById('newsViewTitle').textContent = 'Annonce';
+  document.getElementById('news-view-content').innerHTML = `
+    <div class="news-detail">
+      ${coverLarge}
+      <span class="news-tag" style="position:static; display:inline-block; margin-bottom:.75rem; background: var(--sand-100);">${CAT_LABELS[n.category]}</span>
+      <h2>${escapeHtml(n.title)}</h2>
+      <div class="news-date">${formatDate(n.date)}</div>
+      ${paragraphs}
+    </div>
+  `;
+  openModal('modal-news-view');
+}
+
+/* =====================================================
+   ADMIN
+   ===================================================== */
+
+function openAdminLogin(){
+  if(isAdmin){
+    if(confirm('Vous êtes déjà connecté en admin. Voulez-vous vous déconnecter ?')) logoutAdmin();
+    return;
+  }
+  document.getElementById('admin-pwd').value = '';
+  document.getElementById('admin-error').style.display = 'none';
+  openModal('modal-admin');
+  setTimeout(() => document.getElementById('admin-pwd').focus(), 100);
+}
+
+function handleAdminLogin(e){
+  e.preventDefault();
+  const pwd = document.getElementById('admin-pwd').value;
+  if(pwd === ADMIN_PASSWORD){
+    isAdmin = true;
+    document.body.classList.add('admin');
+    closeModal('modal-admin');
+    renderNews();
+  } else {
+    document.getElementById('admin-error').style.display = 'block';
+  }
+}
+
+function logoutAdmin(){
+  isAdmin = false;
+  document.body.classList.remove('admin');
+  renderNews();
+}
+
+function openNewsEditor(id = null){
+  if(!isAdmin) return;
+  const form = document.getElementById('modal-editor').querySelector('form');
+  form.reset();
+  document.getElementById('news-id').value = '';
+  currentImage = null;
+  document.getElementById('image-preview').innerHTML = '';
+
+  if(id){
+    const n = news.find(x => x.id === id);
+    if(!n) return;
+    document.getElementById('editorTitle').textContent = 'Modifier l\'annonce';
+    document.getElementById('news-id').value = n.id;
+    document.getElementById('news-title').value = n.title;
+    document.getElementById('news-cat').value = n.category;
+    document.getElementById('news-date').value = n.date;
+    document.getElementById('news-excerpt').value = n.excerpt;
+    document.getElementById('news-body').value = n.body;
+    if(n.image){
+      currentImage = n.image;
+      showImagePreview(n.image);
+    }
+  } else {
+    document.getElementById('editorTitle').textContent = 'Nouvelle annonce';
+    document.getElementById('news-date').value = new Date().toISOString().split('T')[0];
+  }
+
+  openModal('modal-editor');
+}
+
+function editNews(id){
+  openNewsEditor(id);
+}
+
+function saveNews(e){
+  e.preventDefault();
+  const id = document.getElementById('news-id').value;
+  const data = {
+    title: document.getElementById('news-title').value.trim(),
+    category: document.getElementById('news-cat').value,
+    date: document.getElementById('news-date').value,
+    excerpt: document.getElementById('news-excerpt').value.trim(),
+    body: document.getElementById('news-body').value.trim(),
+    image: currentImage
+  };
+
+  if(id){
+    const idx = news.findIndex(x => x.id === parseInt(id));
+    if(idx >= 0) news[idx] = { ...news[idx], ...data };
+  } else {
+    news.unshift({ id: nextId++, ...data });
+  }
+
+  try {
+    persistNews();
+  } catch(err){
+    alert('Le stockage local est plein. Retirez la photo ou supprimez d\'anciennes annonces.');
+    return;
+  }
+  closeModal('modal-editor');
+  renderNews();
+
+  // Petit feedback
+  const banner = document.createElement('div');
+  banner.style.cssText = 'position:fixed; bottom:1.5rem; right:1.5rem; background: var(--olive-600); color:#fff; padding: .9rem 1.4rem; border-radius: var(--radius); box-shadow: var(--shadow-lg); z-index: 300; font-weight: 500;';
+  banner.textContent = id ? '✓ Annonce modifiée' : '✓ Annonce publiée';
+  document.body.appendChild(banner);
+  setTimeout(() => banner.remove(), 2500);
+}
+
+function deleteNews(id){
+  if(!confirm('Supprimer cette annonce ? Cette action est définitive.')) return;
+  news = news.filter(x => x.id !== id);
+  persistNews();
+  renderNews();
+}
+
+/* =====================================================
+   MODALES
+   ===================================================== */
+
+function openModal(id){
+  document.getElementById(id).classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id){
+  document.getElementById(id).classList.remove('is-open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.modal').forEach(m => {
+  m.addEventListener('click', e => {
+    if(e.target === m) closeModal(m.id);
+  });
+});
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape'){
+    document.querySelectorAll('.modal.is-open').forEach(m => closeModal(m.id));
+  }
+});
+
+/* =====================================================
+   FORM CONTACT
+   ===================================================== */
+
+function handleContact(e){
+  e.preventDefault();
+  alert('Merci pour votre message ! En production, ce formulaire enverrait l\'email à l\'association.');
+  e.target.reset();
+}
+
+/* =====================================================
+   INIT
+   ===================================================== */
+
+document.getElementById('year').textContent = new Date().getFullYear();
+loadStoredNews();
+renderNews();
+</script>
+</body>
+</html>
