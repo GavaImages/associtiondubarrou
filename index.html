@@ -583,26 +583,34 @@ p{ margin: 0 0 1rem; }
 }
 
 /* ============ ASSOCIATION ============ */
-.assoc-grid{
-  display:grid; grid-template-columns: 1fr 1fr; gap: 3rem;
-  align-items: start;
+.assoc-content{
+  max-width: 820px;
+  margin: 0 auto;
 }
-.assoc-text h3{ margin: 1.75rem 0 .5rem; }
-.assoc-text h3:first-child{ margin-top: 0; }
-.assoc-side{
-  background: var(--white); border: 1px solid var(--line);
-  border-radius: var(--radius); padding: 2rem;
-  position: sticky; top: 6rem;
+.assoc-content h3{ margin: 1.75rem 0 .5rem; }
+.assoc-content h3:first-child{ margin-top: 0; }
+
+.missions-list{
+  list-style: none;
+  padding: 0;
+  margin: .5rem 0 1.5rem;
 }
-.assoc-side h3{ margin-bottom: 1rem; }
-.bureau{ list-style:none; padding:0; margin: 0 0 1.5rem; }
-.bureau li{
-  padding: .75rem 0; border-bottom: 1px dashed var(--line);
-  display:flex; justify-content:space-between; gap:1rem;
+.missions-list li{
+  position: relative;
+  padding-left: 1.6rem;
+  margin-bottom: .75rem;
+  line-height: 1.55;
 }
-.bureau li:last-child{ border-bottom: none; }
-.bureau .role{ color: var(--ink-soft); font-size:.9rem; }
-.bureau .name{ font-weight:600; }
+.missions-list li::before{
+  content: '';
+  position: absolute;
+  left: .1rem;
+  top: .6em;
+  width: 8px;
+  height: 8px;
+  background: var(--terra-500);
+  border-radius: 50%;
+}
 
 /* ============ CONTACTS ============ */
 .contact-grid{
@@ -944,8 +952,8 @@ body.admin .admin-only{ display: inline-flex !important; }
 @media (max-width: 900px){
   .hero-inner{ grid-template-columns: 1fr; gap: 2.5rem; }
   .hero-visual{ max-width: 360px; margin: 0 auto; }
-  .assoc-grid, .contact-grid{ grid-template-columns: 1fr; gap: 2rem; }
-  .assoc-side{ position: static; }
+  .assoc-content{ max-width: none; }
+  .contact-grid{ grid-template-columns: 1fr; gap: 2rem; }
   .footer-grid{ grid-template-columns: 1fr 1fr; gap: 2rem; }
   .facts{ grid-template-columns: 1fr 1fr; }
   .fact:nth-child(2){ border-right:none; }
@@ -1146,6 +1154,7 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
   gap: 1.5rem;
   max-width: 900px;
   margin: 0 auto;
+  align-items: start;  /* pas d'étirement — chaque cellule prend sa hauteur naturelle */
 }
 .trombi-item{
   cursor: pointer;
@@ -1155,6 +1164,12 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
   padding: 0;
   font-family: inherit;
   transition: transform .2s;
+  /* Forcer un layout en colonne (évite le centrage vertical par défaut des boutons sur Safari/iOS) */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  -webkit-appearance: none;
+  appearance: none;
 }
 .trombi-item:hover{ transform: translateY(-4px); }
 .trombi-item:focus-visible{ outline: 3px solid var(--terra-400); outline-offset: 4px; border-radius: var(--radius); }
@@ -1661,31 +1676,26 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
         <p>Une équipe de bénévoles habitants du quartier, au service du lien social et du bien-vivre ensemble.</p>
       </div>
 
-      <div class="assoc-grid">
-        <div class="assoc-text">
-          <h3>Notre histoire</h3>
-          <p>Créée dans les années 1980 à l'initiative de quelques familles installées au Barrou, l'association est née du désir simple de mieux se connaître entre voisins et de défendre les intérêts du quartier auprès des institutions sétoises.</p>
-          <p>Au fil des décennies, l'association est devenue un acteur reconnu de la vie locale, organisateur d'événements appréciés et interlocuteur régulier de la mairie sur tous les sujets qui touchent à la vie du quartier.</p>
+      <div class="assoc-content">
+        <h3>Notre histoire</h3>
+        <p>Créée dans les années 1980 à l'initiative de quelques familles installées au Barrou, l'association est née du désir simple de mieux se connaître entre voisins et de partager de bons moments dans le quartier.</p>
+        <p>Au fil des décennies, elle est devenue un acteur reconnu de la vie locale, apprécié pour ses activités hebdomadaires et ses événements conviviaux qui rassemblent chaque année habitants et amis du Barrou.</p>
 
-          <h3>Nos missions</h3>
-          <p>Représenter et défendre les intérêts du quartier ; animer la vie locale par des événements ouverts à tous les adhérents ; informer les habitants sur les projets municipaux et travaux concernant le Barrou ; entretenir le lien intergénérationnel entre voisins.</p>
+        <h3>Nos missions</h3>
+        <ul class="missions-list">
+          <li>Animer la vie du quartier avec des repas partagés, des sorties et des rendez-vous festifs</li>
+          <li>Proposer des activités hebdomadaires ouvertes aux adhérents&nbsp;: gymnastique, danse de salon, modelage poterie, musique, dessin &amp; peinture, yoga et théâtre</li>
+          <li>Créer du lien intergénérationnel entre voisins et habitants du Barrou</li>
+          <li>Contribuer à la préservation du cadre de vie à travers une commission Environnement dédiée</li>
+        </ul>
 
-          <h3>Comment adhérer&nbsp;?</h3>
-          <p>L'adhésion est ouverte à tous les habitants du quartier et amis du Barrou. Elle se fait par bulletin d'inscription disponible auprès du bureau ou téléchargeable ci-dessous. La cotisation annuelle permet de couvrir les frais de fonctionnement et de soutenir nos actions.</p>
+        <h3>Comment adhérer&nbsp;?</h3>
+        <p>L'adhésion est ouverte à tous les habitants du quartier et amis du Barrou. Elle se fait par bulletin d'inscription disponible auprès du bureau ou téléchargeable ci-dessous. La cotisation annuelle de 15&nbsp;€ par adhérent permet de couvrir les frais de fonctionnement et de soutenir nos actions.</p>
 
-          <a href="bulletin-adhesion-2026-2027.pdf" class="btn btn-primary" download>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Télécharger le bulletin d'adhésion 2026-2027
-          </a>
-        </div>
-
-        <aside class="assoc-side">
-          <h3>Permanences</h3>
-          <p style="font-size: .95rem; color: var(--ink-soft);">Le bureau se réunit tous les premiers mardis du mois. Les adhérents peuvent prendre contact à tout moment via la page Contacts.</p>
-
-          <h3 style="margin-top: 1.5rem;">Statuts</h3>
-          <p style="font-size: .95rem; color: var(--ink-soft);">Association loi 1901 déclarée à la sous-préfecture de Béziers, à but non lucratif et apolitique.</p>
-        </aside>
+        <a href="bulletin-adhesion-2026-2027.pdf" class="btn btn-primary" download>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Télécharger le bulletin d'adhésion 2026-2027
+        </a>
       </div>
 
       <!-- ============ TROMBINOSCOPE Conseil d'administration ============ -->
