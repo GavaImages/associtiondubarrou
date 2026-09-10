@@ -488,16 +488,46 @@ p{ margin: 0 0 1rem; }
 .news-card.cat-evenement .news-cover{ background: linear-gradient(135deg, #f1c9b3, var(--terra-400)); color: #fff; }
 .news-card.cat-info .news-cover{ background: linear-gradient(135deg, #b9d3dc, var(--med-500)); color: #fff; }
 .news-card.cat-vie-quartier .news-cover{ background: linear-gradient(135deg, #d3dcb9, var(--olive-600)); color:#fff; }
+.news-card.cat-evenement .news-cover.has-photo,
+.news-card.cat-info .news-cover.has-photo,
+.news-card.cat-vie-quartier .news-cover.has-photo{
+  background: var(--sand-100);
+}
 .news-cover.has-photo{
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: var(--sand-100);
+  height: auto;
+  min-height: 180px;
+  max-height: 340px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.news-cover.has-photo img{
+  width: 100%;
+  height: auto;
+  max-height: 340px;
+  object-fit: contain;
+  display: block;
 }
 .news-cover-large.has-photo{
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 280px;
+  background: var(--sand-100);
+  height: auto;
+  min-height: 220px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.news-cover-large.has-photo img{
+  width: 100%;
+  height: auto;
+  max-height: 65vh;
+  object-fit: contain;
+  display: block;
 }
 
 .news-tag{
@@ -933,6 +963,166 @@ body.admin .admin-only{ display: inline-flex !important; }
   .hero{ padding: 3rem 0; }
   .footer-grid{ grid-template-columns: 1fr; }
   .news-bar{ flex-direction:column; align-items: stretch; }
+
+  /* ============ ADMIN — Adaptations mobile ============ */
+
+  /* Bandeau admin : empilé, texte plus petit */
+  .admin-banner{
+    flex-direction: column;
+    gap: .5rem;
+    padding: .75rem 1rem;
+    font-size: .85rem;
+  }
+  .admin-banner span{ text-align:center; }
+  .admin-banner button{ width: 100%; max-width: 260px; padding: .4rem 1rem; }
+
+  /* En-tête de panneau : titre puis bouton, empilés pleine largeur */
+  .admin-panel-head{
+    flex-direction: column;
+    align-items: stretch;
+    gap: .85rem;
+    margin-bottom: 1.5rem;
+  }
+  .admin-panel-head h2{ font-size: 1.4rem; }
+  .admin-panel-head .btn{ width: 100%; justify-content:center; }
+
+  /* Onglets : défilement horizontal si nécessaire */
+  .admin-tabs{
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .admin-tabs::-webkit-scrollbar{ display:none; }
+  .admin-tab{
+    padding: .85rem 1rem;
+    font-size: .9rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .admin-tab svg{ width: 16px; height: 16px; }
+
+  /* Item de liste : passage en vertical, tout devient lisible */
+  .admin-item{
+    flex-direction: column;
+    align-items: stretch;
+    gap: .85rem;
+    padding: 1rem;
+  }
+  .admin-item-thumb{
+    width: 100%;
+    height: 140px;
+    border-radius: var(--radius-sm);
+  }
+  .admin-item-thumb svg{ width: 40px; height: 40px; }
+  .admin-item-body h4{
+    white-space: normal;
+    overflow: visible;
+    text-overflow: initial;
+    font-size: 1.1rem;
+    line-height: 1.3;
+  }
+  .admin-item-meta{
+    gap: .5rem .85rem;
+    font-size: .85rem;
+  }
+  .admin-item-actions{
+    justify-content: flex-end;
+    border-top: 1px solid var(--line);
+    padding-top: .75rem;
+    gap: .5rem;
+  }
+  .admin-item-actions .icon-btn{
+    width: 42px; height: 42px;  /* zones tactiles confortables */
+  }
+  .admin-item-actions .icon-btn svg{ width: 18px; height: 18px; }
+
+  /* Barre supérieure du tableau de bord : titre + boutons empilés */
+  .admin-dashboard-head{ padding-top: 2rem; }
+  .admin-dashboard-head h1{ font-size: 1.6rem !important; }
+  .admin-dashboard-topbar{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    padding-bottom: 1.5rem;
+  }
+  .admin-dashboard-topbar > div:last-child{
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: .5rem !important;
+  }
+  .admin-dashboard-topbar > div:last-child .btn{
+    width: 100%;
+    justify-content: center;
+    padding: .7rem .5rem;
+  }
+
+  /* Modales : les boutons du bas passent en pleine largeur */
+  .modal-body form > div:last-child .btn{
+    flex: 1;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  /* Champs de saisie plus confortables au doigt */
+  .field input, .field textarea, .field select{
+    font-size: 16px;  /* évite le zoom auto iOS */
+    padding: .85rem .9rem;
+  }
+}
+
+@keyframes spin{
+  to { transform: rotate(360deg); }
+}
+
+/* ============ BOUTON FLOTTANT ADMIN ============ */
+/* Visible sur toutes les sections quand on est connecté,
+   sauf sur les pages admin elles-mêmes. */
+.admin-fab{
+  display: none;
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 90;
+  background: var(--terra-500);
+  color: #fff;
+  border: none;
+  padding: .85rem 1.35rem;
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: .95rem;
+  cursor: pointer;
+  align-items: center;
+  gap: .55rem;
+  box-shadow: 0 8px 24px rgba(184, 84, 47, .35), 0 2px 6px rgba(42,32,24,.1);
+  transition: transform .2s, box-shadow .2s, background .2s;
+}
+.admin-fab svg{ width: 18px; height: 18px; }
+.admin-fab:hover{
+  background: var(--terra-600);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(184, 84, 47, .45), 0 4px 8px rgba(42,32,24,.15);
+}
+.admin-fab:focus-visible{ outline: 3px solid var(--sand-200); outline-offset: 3px; }
+/* Actif seulement quand connecté ET hors de la zone admin */
+body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
+
+@media (max-width: 720px){
+  .admin-fab{
+    bottom: 1rem;
+    right: 1rem;
+    padding: .75rem 1.1rem;
+    font-size: .9rem;
+  }
+}
+@media (max-width: 460px){
+  .admin-fab{
+    padding: 0;
+    width: 54px; height: 54px;
+    justify-content: center;
+  }
+  .admin-fab span{ display: none; }
+  .admin-fab svg{ width: 22px; height: 22px; }
 }
 
 @media (max-width: 460px){
@@ -961,6 +1151,17 @@ body.admin .admin-only{ display: inline-flex !important; }
   <button onclick="showPage('admin-dashboard')">Tableau de bord</button>
   <button onclick="handleLogout()">Se déconnecter</button>
 </div>
+
+<!-- Bouton flottant pour retourner à l'admin depuis n'importe quelle section -->
+<button class="admin-fab" onclick="showPage('admin-dashboard')" aria-label="Retour au tableau de bord administrateur" title="Tableau de bord">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="3" y="3" width="7" height="9"/>
+    <rect x="14" y="3" width="7" height="5"/>
+    <rect x="14" y="12" width="7" height="9"/>
+    <rect x="3" y="16" width="7" height="5"/>
+  </svg>
+  <span>Tableau de bord</span>
+</button>
 
 <!-- ============ HEADER ============ -->
 <header class="site-header">
@@ -1696,20 +1897,60 @@ function loadStoredNews(){
    ===================================================== */
 
 let currentImage = null; // base64 de l'image en cours d'édition
+let imageProcessing = false; // pour bloquer la publication pendant le traitement
 
 function handleImageUpload(e){
   const file = e.target.files[0];
   if(!file) return;
-  if(!file.type.startsWith('image/')){
-    alert('Veuillez sélectionner une image.');
+
+  const name = (file.name || '').toLowerCase();
+  const type = (file.type || '').toLowerCase();
+  const preview = document.getElementById('image-preview');
+
+  // iPhone : les photos sont en HEIC par défaut, non lisibles par le navigateur.
+  if(name.endsWith('.heic') || name.endsWith('.heif') ||
+     type === 'image/heic' || type === 'image/heif'){
+    alert("Le format HEIC (photos iPhone) n'est pas lisible par le navigateur.\n\n" +
+          "Deux solutions :\n" +
+          "• Sur iPhone → Réglages → Appareil photo → Formats → « Le plus compatible » (nouvelles photos)\n" +
+          "• Ou : ouvrir la photo dans Photos, l'exporter en JPG, puis réimporter ici");
+    e.target.value = '';
     return;
   }
+
+  if(!type.startsWith('image/')){
+    alert('Veuillez sélectionner une image (JPG, PNG ou WebP).');
+    e.target.value = '';
+    return;
+  }
+
+  // Fichier trop gros ? Prévenir avant traitement.
+  if(file.size > 25 * 1024 * 1024){
+    alert("Cette image dépasse 25 Mo — trop lourde pour être traitée dans le navigateur.\nCompressez-la avant de la réimporter.");
+    e.target.value = '';
+    return;
+  }
+
+  // État de chargement visible
+  imageProcessing = true;
+  preview.innerHTML = `
+    <div style="padding: 1rem 1.25rem; background: var(--sand-100); border: 1px solid var(--line); border-radius: var(--radius-sm); color: var(--ink-soft); display:flex; align-items:center; gap:.75rem;">
+      <div class="spinner" style="width:20px; height:20px; border: 2px solid var(--sand-300); border-top-color: var(--terra-500); border-radius: 50%; animation: spin 0.8s linear infinite;"></div>
+      <span>Traitement de l'image…</span>
+    </div>`;
+
   resizeImage(file, 1200, 0.82)
     .then(dataUrl => {
       currentImage = dataUrl;
+      imageProcessing = false;
       showImagePreview(dataUrl);
     })
-    .catch(() => alert('Impossible de charger cette image.'));
+    .catch(() => {
+      imageProcessing = false;
+      preview.innerHTML = '';
+      alert("Impossible de lire cette image. Essayez avec un fichier JPG ou PNG classique.");
+      e.target.value = '';
+    });
 }
 
 function showImagePreview(dataUrl){
@@ -1773,6 +2014,10 @@ function showPage(pageName){
   document.querySelectorAll('.page').forEach(p => p.classList.remove('is-active'));
   const page = document.getElementById('page-' + pageName);
   if(page) page.classList.add('is-active');
+
+  // Le bouton flottant se cache automatiquement sur les pages admin
+  document.body.classList.toggle('on-admin-page',
+    pageName === 'admin-dashboard' || pageName === 'admin-login');
 
   // Met à jour le menu actif
   document.querySelectorAll('.main-nav a').forEach(a => {
@@ -1861,7 +2106,8 @@ function newsCardHtml(n){
     </div>` : '';
 
   const cover = n.image
-    ? `<div class="news-cover has-photo" style="background-image: url('${n.image}');">
+    ? `<div class="news-cover has-photo">
+         <img src="${n.image}" alt="" loading="lazy">
          <span class="news-tag">${CAT_LABELS[n.category]}</span>
        </div>`
     : `<div class="news-cover">
@@ -1910,7 +2156,7 @@ function viewNews(id){
   ).join('');
 
   const coverLarge = n.image
-    ? `<div class="news-cover-large has-photo" style="background-image: url('${n.image}');"></div>`
+    ? `<div class="news-cover-large has-photo"><img src="${n.image}" alt="Illustration de l'annonce"></div>`
     : `<div class="news-cover-large">${CAT_ICONS[n.category] || ''}</div>`;
 
   document.getElementById('newsViewTitle').textContent = 'Annonce';
@@ -1991,6 +2237,7 @@ function openNewsEditor(id = null){
   form.reset();
   document.getElementById('news-id').value = '';
   currentImage = null;
+  imageProcessing = false;
   document.getElementById('image-preview').innerHTML = '';
 
   if(id){
@@ -2019,6 +2266,10 @@ function editNews(id){ openNewsEditor(id); }
 
 function saveNews(e){
   e.preventDefault();
+  if(imageProcessing){
+    alert("L'image est encore en cours de traitement. Attendez quelques instants avant de publier.");
+    return;
+  }
   const id = document.getElementById('news-id').value;
   const data = {
     title: document.getElementById('news-title').value.trim(),
