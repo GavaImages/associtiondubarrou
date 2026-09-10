@@ -38,9 +38,9 @@
 <meta name="twitter:description" content="Vie de quartier, animations et actualités au bord de l'étang de Thau." />
 <meta name="twitter:image" content="https://lebarrou34.com/og-image.jpg" />
 
-<!-- ============ Favicon (SVG en data URL — remplaçable par un .ico) ============ -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23b8542f'/%3E%3Ctext x='50' y='72' font-family='Georgia,serif' font-size='62' text-anchor='middle' fill='white' font-weight='600'%3EB%3C/text%3E%3C/svg%3E" />
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23b8542f'/%3E%3Ctext x='50' y='72' font-family='Georgia,serif' font-size='62' text-anchor='middle' fill='white' font-weight='600'%3EB%3C/text%3E%3C/svg%3E" />
+<!-- ============ Favicon ============ -->
+<link rel="icon" type="image/png" href="logo-barrou.png" />
+<link rel="apple-touch-icon" href="logo-barrou.png" />
 
 <!-- ============ Données structurées Schema.org (JSON-LD) ============ -->
 <!-- Aide Google à comprendre qu'il s'agit d'une association locale et à afficher un "knowledge panel". -->
@@ -74,7 +74,7 @@
   "contactPoint": {
     "@type": "ContactPoint",
     "contactType": "customer service",
-    "email": "contact@lebarrou34.com",
+    "email": "lebarrou34200@gmail.com",
     "availableLanguage": ["French"]
   },
   "sameAs": [
@@ -190,15 +190,17 @@ p{ margin: 0 0 1rem; }
 }
 .brand:hover{ color: var(--ink); }
 .brand-mark{
-  width:46px; height:46px;
-  background: var(--terra-500);
-  color:#fff;
+  width:52px; height:52px;
   border-radius: 50%;
   display:grid; place-items:center;
-  font-family: var(--serif); font-weight: 600;
-  font-size: 1.4rem;
-  box-shadow: var(--shadow-sm);
   flex-shrink:0;
+  overflow: hidden;
+}
+.brand-mark img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 .brand-text{ display:flex; flex-direction:column; line-height:1.1; }
 .brand-name{ font-family: var(--serif); font-weight:600; font-size:1.15rem; }
@@ -660,7 +662,7 @@ p{ margin: 0 0 1rem; }
   margin-top: 4rem;
 }
 .footer-grid{
-  display:grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  display:grid; grid-template-columns: 1.6fr 1fr 1fr;
   gap: 2.5rem;
   margin-bottom: 2.5rem;
 }
@@ -1137,6 +1139,85 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
   .container{ padding: 0 1.1rem; }
 }
 
+/* ============ TROMBINOSCOPE ============ */
+.trombi-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.trombi-item{
+  cursor: pointer;
+  text-align: center;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  transition: transform .2s;
+}
+.trombi-item:hover{ transform: translateY(-4px); }
+.trombi-item:focus-visible{ outline: 3px solid var(--terra-400); outline-offset: 4px; border-radius: var(--radius); }
+.trombi-photo{
+  aspect-ratio: 3/4;
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: .75rem;
+  background: var(--sand-100);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow .25s;
+}
+.trombi-item:hover .trombi-photo{ box-shadow: var(--shadow); }
+.trombi-photo img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .35s ease-out;
+}
+.trombi-item:hover .trombi-photo img{ transform: scale(1.04); }
+.trombi-name{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--ink);
+  line-height: 1.2;
+  margin: 0 0 .15rem;
+}
+.trombi-role{
+  font-size: .82rem;
+  color: var(--terra-600);
+  font-weight: 500;
+  letter-spacing: .02em;
+}
+
+/* ============ BANDEAU PARTENAIRES ============ */
+.partners-section{
+  padding: 3rem 0 4rem;
+  background: linear-gradient(to bottom, transparent 0%, var(--white) 40%, var(--white) 100%);
+  position: relative;
+  margin-top: 4rem;
+}
+.partners-section .container{ text-align: center; }
+.partners-title{
+  font-family: var(--sans);
+  font-size: .85rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 1.75rem;
+}
+.partners-banner{
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  max-height: 80px;
+  display: block;
+  margin: 0 auto;
+  opacity: .95;
+}
+
 /* ============ GALERIE PUBLIQUE ============ */
 .gallery-grid{
   display: grid;
@@ -1274,6 +1355,18 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
   .lightbox-next{ right: .5rem; width: 42px; height: 42px; }
   #lightbox-img{ max-height: 65vh; }
   #lightbox-caption{ font-size: 1rem; }
+
+  /* Trombinoscope : 2 colonnes en mobile pour rester lisible */
+  .trombi-grid{ grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+  .trombi-name{ font-size: .95rem; }
+  .trombi-role{ font-size: .78rem; }
+
+  /* Partenaires : moins d'espacement */
+  .partners-section{ padding: 2rem 0 3rem; margin-top: 2.5rem; }
+  .partners-banner{ max-height: 60px; }
+}
+@media (max-width: 460px){
+  .trombi-grid{ gap: 1rem; }
 }
 
 /* Reduced motion */
@@ -1311,7 +1404,7 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
 <header class="site-header">
   <div class="container header-inner">
     <a href="#" class="brand" data-page="accueil">
-      <span class="brand-mark" aria-hidden="true">B</span>
+      <span class="brand-mark" aria-hidden="true"><img src="logo-barrou.png" alt=""></span>
       <span class="brand-text">
         <span class="brand-name">Le Barrou</span>
         <span class="brand-loc">Sète · Quartier</span>
@@ -1580,20 +1673,13 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
           <h3>Comment adhérer&nbsp;?</h3>
           <p>L'adhésion est ouverte à tous les habitants du quartier et amis du Barrou. Elle se fait par bulletin d'inscription disponible auprès du bureau ou téléchargeable ci-dessous. La cotisation annuelle permet de couvrir les frais de fonctionnement et de soutenir nos actions.</p>
 
-          <a href="#" class="btn btn-primary" onclick="alert('En production, ce bouton téléchargerait le bulletin d\\'inscription au format PDF.'); return false;">
+          <a href="bulletin-adhesion-2026-2027.pdf" class="btn btn-primary" download>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Télécharger le bulletin d'adhésion
+            Télécharger le bulletin d'adhésion 2026-2027
           </a>
         </div>
 
         <aside class="assoc-side">
-          <h3>Le bureau</h3>
-          <ul class="bureau">
-            <li><span class="role">Présidence</span><span class="name">Françoise</span></li>
-            <li><span class="role">Vice-présidence</span><span class="name">Aline</span></li>
-            <li><span class="role">Secrétariat</span><span class="name">Jo</span></li>
-          </ul>
-
           <h3>Permanences</h3>
           <p style="font-size: .95rem; color: var(--ink-soft);">Le bureau se réunit tous les premiers mardis du mois. Les adhérents peuvent prendre contact à tout moment via la page Contacts.</p>
 
@@ -1601,6 +1687,18 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
           <p style="font-size: .95rem; color: var(--ink-soft);">Association loi 1901 déclarée à la sous-préfecture de Béziers, à but non lucratif et apolitique.</p>
         </aside>
       </div>
+
+      <!-- ============ TROMBINOSCOPE Conseil d'administration ============ -->
+      <div style="margin-top: 4rem;">
+        <div class="section-head" style="margin-bottom: 2rem;">
+          <span class="eyebrow">Ils font vivre l'association</span>
+          <h2>Le conseil d'administration</h2>
+          <p>Une équipe de bénévoles au service du quartier — cliquez sur un portrait pour l'agrandir.</p>
+        </div>
+
+        <div class="trombi-grid" id="trombi-grid"></div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1625,7 +1723,7 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
               </div>
               <div>
                 <strong>Téléphone</strong>
-                <a href="tel:+33000000000">À demander auprès du bureau</a>
+                <a href="tel:+33670748580">06 70 74 85 80</a>
               </div>
             </li>
             <li>
@@ -1634,16 +1732,22 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
               </div>
               <div>
                 <strong>Courriel</strong>
-                <a href="mailto:contact@lebarrou34.com">contact@lebarrou34.com</a>
+                <a href="mailto:lebarrou34200@gmail.com">lebarrou34200@gmail.com</a>
               </div>
             </li>
             <li>
               <div class="contact-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
               </div>
-              <div>
-                <strong>Adresse postale</strong>
-                Quartier du Barrou<br>34200 Sète
+              <div style="flex:1;">
+                <strong>Adresse</strong>
+                50, rue des Fauvettes<br>34200 Sète
+                <div style="margin-top: .75rem;">
+                  <a href="https://www.google.com/maps/dir/?api=1&destination=50+rue+des+Fauvettes+34200+S%C3%A8te" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" style="text-decoration:none;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                    Itinéraire
+                  </a>
+                </div>
               </div>
             </li>
             <li>
@@ -1817,6 +1921,14 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
 
 </main>
 
+<!-- ============ BANDEAU PARTENAIRES ============ -->
+<section class="partners-section" aria-label="Nos partenaires">
+  <div class="container">
+    <p class="partners-title">Ils nous soutiennent</p>
+    <img src="logo-partenaires.jpg" alt="Logos des partenaires de l'association : Région Occitanie, Département de l'Hérault, Sète Agglopôle, Ville de Sète, Lycée Paul Bousquet, Syndicat Mixte du Bassin de Thau, CPIE, Voile Latine, Arago de Sète, Parlement de la Mer, Azaïs-Polito" class="partners-banner" loading="lazy">
+  </div>
+</section>
+
 <!-- ============ FOOTER ============ -->
 <footer class="site-footer">
   <div class="container">
@@ -1828,7 +1940,7 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
           <a href="https://www.facebook.com/assolebarrouofficiel" aria-label="Facebook" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
           </a>
-          <a href="mailto:contact@lebarrou34.com" aria-label="Email">
+          <a href="mailto:lebarrou34200@gmail.com" aria-label="Email">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </a>
         </div>
@@ -1852,18 +1964,9 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
           <li><a href="#" data-page="admin-login">Espace admin</a></li>
         </ul>
       </div>
-      <div>
-        <h4>Mentions</h4>
-        <ul>
-          <li><a href="#" onclick="alert('Page à compléter.'); return false;">Mentions légales</a></li>
-          <li><a href="#" onclick="alert('Page à compléter.'); return false;">Politique de confidentialité</a></li>
-          <li><a href="#" onclick="alert('Page à compléter.'); return false;">Accessibilité</a></li>
-        </ul>
-      </div>
     </div>
     <div class="copyright">
-      <span>© <span id="year"></span> Association du Quartier du Barrou — Sète</span>
-      <span>Site refondu avec ❤️ pour le quartier</span>
+      <span>© <span id="year"></span> Association du Quartier du Barrou – Sète</span>
     </div>
   </div>
 </footer>
@@ -2741,8 +2844,8 @@ function renderPublicGallery(){
 let lightboxPhotos = [];
 let lightboxIndex = 0;
 
-function openLightbox(index){
-  lightboxPhotos = [...photos].sort((a,b) => b.date.localeCompare(a.date));
+function openLightbox(index, items){
+  lightboxPhotos = items || [...photos].sort((a,b) => b.date.localeCompare(a.date));
   if(lightboxPhotos.length === 0) return;
   lightboxIndex = Math.max(0, Math.min(index, lightboxPhotos.length - 1));
   updateLightbox();
@@ -2768,8 +2871,11 @@ function updateLightbox(){
   img.src = p.image;
   img.alt = p.caption || '';
   document.getElementById('lightbox-caption').textContent = p.caption || '';
+  // Ligne meta : subtitle explicite si fourni, sinon date formatée
+  const meta = p.subtitle || (p.date ? formatDate(p.date) : '');
+  const counter = `${lightboxIndex + 1} sur ${lightboxPhotos.length}`;
   document.getElementById('lightbox-meta').textContent =
-    `${formatDate(p.date)} · Photo ${lightboxIndex + 1} sur ${lightboxPhotos.length}`;
+    meta ? `${meta} · ${counter}` : counter;
   // Cacher les flèches s'il n'y a qu'une seule photo
   const single = lightboxPhotos.length <= 1;
   document.querySelector('.lightbox-prev').hidden = single;
@@ -3143,6 +3249,46 @@ function handleContact(e){
 }
 
 /* =====================================================
+   TROMBINOSCOPE — Conseil d'administration
+   ===================================================== */
+
+const CA_MEMBERS = [
+  { name: 'Hélène Roube',            role: 'Présidente',                    file: 'members/helene-roube.jpg' },
+  { name: 'Bruno Boutrolle',         role: 'Vice-Président & Secrétaire',   file: 'members/bruno-boutrolle.jpg' },
+  { name: 'Georges Hamon',           role: 'Trésorier',                     file: 'members/georges-hamon.jpg' },
+  { name: 'Etienne Juanola',         role: 'Trésorier adjoint',             file: 'members/etienne-juanola.jpg' },
+  { name: 'Gérard Bertin',           role: 'Membre',                        file: 'members/gerard-bertin.jpg' },
+  { name: 'Françoise Marcenac',      role: 'Membre',                        file: 'members/francoise-marcenac.jpg' },
+  { name: 'Nadine Cornet',           role: 'Membre',                        file: 'members/nadine-cornet.jpg' },
+  { name: 'Jean Degioannis',         role: 'Membre',                        file: 'members/jean-degioannis.jpg' },
+  { name: 'Aline Dufresne Thomazo',  role: 'Membre',                        file: 'members/aline-dufresne-thomazo.jpg' },
+  { name: 'Françoise Roube',         role: 'Membre',                        file: 'members/francoise-roube.jpg' }
+];
+
+function renderTrombinoscope(){
+  const el = document.getElementById('trombi-grid');
+  if(!el) return;
+  el.innerHTML = CA_MEMBERS.map((m, i) => `
+    <button class="trombi-item" onclick="openTrombiLightbox(${i})" aria-label="Agrandir le portrait de ${escapeHtml(m.name)}">
+      <div class="trombi-photo">
+        <img src="${m.file}" alt="Portrait de ${escapeHtml(m.name)}" loading="lazy">
+      </div>
+      <div class="trombi-name">${escapeHtml(m.name)}</div>
+      <div class="trombi-role">${escapeHtml(m.role)}</div>
+    </button>
+  `).join('');
+}
+
+function openTrombiLightbox(index){
+  const items = CA_MEMBERS.map(m => ({
+    image: m.file,
+    caption: m.name,
+    subtitle: m.role
+  }));
+  openLightbox(index, items);
+}
+
+/* =====================================================
    INIT
    ===================================================== */
 
@@ -3154,6 +3300,7 @@ restoreSession();
 renderNews();
 renderPublicActivities();
 renderPublicGallery();
+renderTrombinoscope();
 if(currentUser) renderAdminLists();
 </script>
 </body>

@@ -1,0 +1,12 @@
+# robots.txt — Association du Quartier du Barrou
+# https://www.robotstxt.org/robotstxt.html
+
+User-agent: *
+Allow: /
+
+# Bloquer l'exploration des URL techniques éventuelles
+Disallow: /admin
+Disallow: /*?*
+
+# Emplacement du plan du site
+Sitemap: https://lebarrou34.com/sitemap.xml
