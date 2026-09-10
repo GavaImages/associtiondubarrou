@@ -314,13 +314,17 @@ p{ margin: 0 0 1rem; }
 .hero-visual{
   position: relative;
   aspect-ratio: 4/5;
+  transform: rotate(1.5deg);
+}
+.hero-visual-frame{
+  width: 100%;
+  height: 100%;
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--sand-100);
   box-shadow: var(--shadow-lg);
-  transform: rotate(1.5deg);
 }
-.hero-visual svg{ width:100%; height:100%; display:block; }
+.hero-visual-frame svg{ width:100%; height:100%; display:block; }
 .hero-stamp{
   position:absolute;
   bottom: -1.2rem; left: -1.2rem;
@@ -331,6 +335,7 @@ p{ margin: 0 0 1rem; }
   font-family: var(--serif);
   transform: rotate(-3deg);
   border: 1px solid var(--line);
+  z-index: 2;
 }
 .hero-stamp strong{ display:block; font-size:1.6rem; color: var(--terra-500); }
 .hero-stamp span{ font-size:.85rem; color: var(--ink-soft); font-family: var(--sans); }
@@ -1214,6 +1219,7 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
         </div>
       </div>
       <div class="hero-visual" aria-hidden="true">
+        <div class="hero-visual-frame">
         <!-- Illustration vectorielle: étang de Thau + barques -->
         <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -1264,6 +1270,7 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
           <path d="M150 100 q 5 -6 10 0 q 5 -6 10 0" stroke="#2a2018" stroke-width="1.5" fill="none" stroke-linecap="round"/>
           <path d="M210 145 q 4 -5 8 0 q 4 -5 8 0" stroke="#2a2018" stroke-width="1.5" fill="none" stroke-linecap="round"/>
         </svg>
+        </div>
         <div class="hero-stamp">
           <strong>40+</strong>
           <span>années d'engagement</span>
