@@ -104,22 +104,26 @@
 
 <style>
 :root{
-  /* Palette Sud — sable, terracotta, bleu Méditerranée */
-  --sand-50:  #fbf6ef;
-  --sand-100: #f5ecdd;
-  --sand-200: #ead8bb;
-  --sand-300: #d9c098;
-  --terra-400:#cf6e4a;
-  --terra-500:#b8542f;
-  --terra-600:#9a4322;
-  --med-500:  #2a6f86;
-  --med-600:  #1f5468;
-  --med-700:  #163e4d;
-  --olive-600:#6b7c4d;
-  --ink:      #2a2018;
-  --ink-soft: #5a4a3d;
-  --line:     #e3d6c0;
-  --white:    #fffbf4;
+  /* Palette Marine — inspirée du logo hippocampe */
+  /* Fonds & neutres bleutés (ex-sable) */
+  --sand-50:  #f4f8fc;   /* fond de page très clair */
+  --sand-100: #e6eff8;   /* cartes, sections claires */
+  --sand-200: #c9dbec;   /* bordures douces, chips */
+  --sand-300: #9fbdd7;   /* accents subtils */
+  /* Accent principal — bleu vif (ex-terracotta) */
+  --terra-400:#4a86bd;   /* bleu médian */
+  --terra-500:#205ea1;   /* bleu vif, boutons primaires, accents */
+  --terra-600:#164478;   /* bleu foncé — hover */
+  /* Bleus profonds pour éléments sombres (headers, dashboard, footer) */
+  --med-500:  #1e4770;   /* navy médian */
+  --med-600:  #143656;   /* navy foncé */
+  --med-700:  #0a2540;   /* navy très profond */
+  /* Touche chaude — ambre doré, utilisée avec parcimonie pour la respiration */
+  --olive-600:#c48a3a;   /* accent ambre chaleureux */
+  --ink:      #0f2338;   /* texte principal, très foncé et bleuté */
+  --ink-soft: #4d5f7a;   /* texte secondaire */
+  --line:     #dbe5f0;   /* bordures fines */
+  --white:    #ffffff;   /* blanc pur */
 
   --serif: "Fraunces", "Times New Roman", serif;
   --sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -128,9 +132,9 @@
   --radius:    12px;
   --radius-lg: 20px;
 
-  --shadow-sm: 0 1px 2px rgba(42,32,24,.06), 0 1px 3px rgba(42,32,24,.04);
-  --shadow:    0 4px 12px rgba(42,32,24,.08), 0 2px 4px rgba(42,32,24,.05);
-  --shadow-lg: 0 12px 32px rgba(42,32,24,.12), 0 4px 8px rgba(42,32,24,.06);
+  --shadow-sm: 0 1px 2px rgba(15,35,56,.06), 0 1px 3px rgba(15,35,56,.04);
+  --shadow:    0 4px 12px rgba(15,35,56,.08), 0 2px 4px rgba(15,35,56,.05);
+  --shadow-lg: 0 12px 32px rgba(15,35,56,.14), 0 4px 8px rgba(15,35,56,.06);
 }
 
 *,*::before,*::after{ box-sizing:border-box; }
@@ -492,9 +496,9 @@ p{ margin: 0 0 1rem; }
   color: var(--terra-600);
 }
 .news-cover svg{ width: 64px; height: 64px; opacity: .55; }
-.news-card.cat-evenement .news-cover{ background: linear-gradient(135deg, #f1c9b3, var(--terra-400)); color: #fff; }
-.news-card.cat-info .news-cover{ background: linear-gradient(135deg, #b9d3dc, var(--med-500)); color: #fff; }
-.news-card.cat-vie-quartier .news-cover{ background: linear-gradient(135deg, #d3dcb9, var(--olive-600)); color:#fff; }
+.news-card.cat-evenement .news-cover{ background: linear-gradient(135deg, #f0dfb8, var(--olive-600)); color: #fff; }
+.news-card.cat-info .news-cover{ background: linear-gradient(135deg, #a8c5e4, var(--terra-400)); color: #fff; }
+.news-card.cat-vie-quartier .news-cover{ background: linear-gradient(135deg, #b0c6dd, var(--med-500)); color:#fff; }
 .news-card.cat-evenement .news-cover.has-photo,
 .news-card.cat-info .news-cover.has-photo,
 .news-card.cat-vie-quartier .news-cover.has-photo{
@@ -1472,31 +1476,31 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
         <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#f5ecdd"/>
-              <stop offset="60%" stop-color="#ead8bb"/>
-              <stop offset="100%" stop-color="#cf6e4a"/>
+              <stop offset="0%" stop-color="#f4f8fc"/>
+              <stop offset="55%" stop-color="#c9dbec"/>
+              <stop offset="100%" stop-color="#7fa8ce"/>
             </linearGradient>
             <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#2a6f86"/>
-              <stop offset="100%" stop-color="#163e4d"/>
+              <stop offset="0%" stop-color="#205ea1"/>
+              <stop offset="100%" stop-color="#0a2540"/>
             </linearGradient>
           </defs>
           <rect width="400" height="500" fill="url(#sky)"/>
-          <!-- Soleil -->
-          <circle cx="290" cy="170" r="55" fill="#fbf6ef" opacity="0.9"/>
-          <circle cx="290" cy="170" r="55" fill="#cf6e4a" opacity="0.3"/>
+          <!-- Soleil (chaleur ambrée pour contraster avec le bleu) -->
+          <circle cx="290" cy="170" r="55" fill="#f9f2e0" opacity="0.95"/>
+          <circle cx="290" cy="170" r="55" fill="#c48a3a" opacity="0.28"/>
           <!-- Collines lointaines -->
-          <path d="M0 300 Q 100 270 180 285 T 400 290 L400 320 L0 320 Z" fill="#9a4322" opacity="0.4"/>
+          <path d="M0 300 Q 100 270 180 285 T 400 290 L400 320 L0 320 Z" fill="#164478" opacity="0.45"/>
           <!-- Eau -->
           <rect x="0" y="305" width="400" height="195" fill="url(#water)"/>
           <!-- Reflets -->
-          <path d="M40 360 L100 360" stroke="#ead8bb" stroke-width="1.5" opacity="0.5"/>
-          <path d="M150 380 L240 380" stroke="#ead8bb" stroke-width="1.5" opacity="0.5"/>
-          <path d="M60 410 L130 410" stroke="#ead8bb" stroke-width="1.5" opacity="0.4"/>
-          <path d="M250 420 L340 420" stroke="#ead8bb" stroke-width="1.5" opacity="0.4"/>
-          <path d="M30 450 L100 450" stroke="#ead8bb" stroke-width="1.5" opacity="0.3"/>
+          <path d="M40 360 L100 360" stroke="#c9dbec" stroke-width="1.5" opacity="0.55"/>
+          <path d="M150 380 L240 380" stroke="#c9dbec" stroke-width="1.5" opacity="0.55"/>
+          <path d="M60 410 L130 410" stroke="#c9dbec" stroke-width="1.5" opacity="0.4"/>
+          <path d="M250 420 L340 420" stroke="#c9dbec" stroke-width="1.5" opacity="0.4"/>
+          <path d="M30 450 L100 450" stroke="#c9dbec" stroke-width="1.5" opacity="0.3"/>
           <!-- Tables conchylicoles -->
-          <g stroke="#2a2018" stroke-width="2" opacity="0.5">
+          <g stroke="#0a2540" stroke-width="2" opacity="0.5">
             <line x1="30" y1="335" x2="180" y2="335"/>
             <line x1="220" y1="345" x2="370" y2="345"/>
             <line x1="40" y1="335" x2="40" y2="345"/>
@@ -1509,14 +1513,14 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
           </g>
           <!-- Barque -->
           <g transform="translate(120, 380)">
-            <path d="M0 0 Q 25 18 50 0 L45 8 L5 8 Z" fill="#2a2018"/>
-            <line x1="25" y1="0" x2="25" y2="-30" stroke="#2a2018" stroke-width="2"/>
-            <path d="M25 -30 L25 -10 L40 -15 Z" fill="#fbf6ef" opacity="0.95"/>
+            <path d="M0 0 Q 25 18 50 0 L45 8 L5 8 Z" fill="#0a2540"/>
+            <line x1="25" y1="0" x2="25" y2="-30" stroke="#0a2540" stroke-width="2"/>
+            <path d="M25 -30 L25 -10 L40 -15 Z" fill="#ffffff" opacity="0.95"/>
           </g>
           <!-- Mouettes -->
-          <path d="M80 130 q 6 -8 12 0 q 6 -8 12 0" stroke="#2a2018" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <path d="M150 100 q 5 -6 10 0 q 5 -6 10 0" stroke="#2a2018" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <path d="M210 145 q 4 -5 8 0 q 4 -5 8 0" stroke="#2a2018" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M80 130 q 6 -8 12 0 q 6 -8 12 0" stroke="#0f2338" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M150 100 q 5 -6 10 0 q 5 -6 10 0" stroke="#0f2338" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M210 145 q 4 -5 8 0 q 4 -5 8 0" stroke="#0f2338" stroke-width="1.5" fill="none" stroke-linecap="round"/>
         </svg>
         </div>
         <div class="hero-stamp">
