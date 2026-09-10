@@ -1996,19 +1996,39 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
           <input type="text" id="activity-title" required maxlength="80">
         </div>
         <div class="field">
-          <label for="activity-frequency">Fréquence / période</label>
-          <input type="text" id="activity-frequency" maxlength="60" placeholder="ex. Toute l'année, Mardis matin, Mai · Septembre…">
+          <label for="activity-frequency">Jour / horaire</label>
+          <input type="text" id="activity-frequency" maxlength="80" placeholder="ex. Mardi · 14h00 – 17h00">
         </div>
         <div class="field">
           <label for="activity-icon">Icône</label>
           <select id="activity-icon">
-            <option value="chat">💬 Discussion / Repas</option>
-            <option value="compass">🧭 Sortie / Voyage</option>
-            <option value="book">📖 Atelier / Culture</option>
-            <option value="walk">🚶 Sport / Marche</option>
-            <option value="calendar">📅 Événement annuel</option>
-            <option value="gift">🎁 Vide-grenier / Marché</option>
+            <optgroup label="Activités hebdomadaires">
+              <option value="dumbbell">🏋️ Gymnastique / Sport</option>
+              <option value="users">👥 Danse / Groupe</option>
+              <option value="vessel">🏺 Poterie / Modelage</option>
+              <option value="music">🎵 Musique</option>
+              <option value="brush">🎨 Dessin / Peinture</option>
+              <option value="yoga">🧘 Yoga / Bien-être</option>
+              <option value="theater">🎭 Théâtre</option>
+              <option value="walk">🚶 Marche / Randonnée</option>
+            </optgroup>
+            <optgroup label="Événements ponctuels">
+              <option value="chat">💬 Repas / Discussion</option>
+              <option value="compass">🧭 Sortie / Excursion</option>
+              <option value="book">📖 Atelier / Culture</option>
+              <option value="calendar">📅 Événement annuel</option>
+              <option value="gift">🎁 Vide-grenier / Marché</option>
+            </optgroup>
           </select>
+        </div>
+        <div class="field">
+          <label for="activity-animator">Animateur / Responsable</label>
+          <input type="text" id="activity-animator" maxlength="80" placeholder="ex. Christine FERRARA">
+          <div class="field-help">Laissez vide pour un événement organisé par le bureau.</div>
+        </div>
+        <div class="field">
+          <label for="activity-phone">Téléphone de contact</label>
+          <input type="tel" id="activity-phone" maxlength="20" placeholder="ex. 07 83 34 07 01">
         </div>
         <div class="field">
           <label for="activity-description">Description *</label>
@@ -2158,7 +2178,7 @@ let currentFilter = 'all';
 let currentAdminTab = 'events';
 
 const STORAGE_KEY = 'lebarrou34-news-v2';
-const ACTIVITY_STORAGE_KEY = 'lebarrou34-activities-v2';
+const ACTIVITY_STORAGE_KEY = 'lebarrou34-activities-v3';
 const PHOTO_STORAGE_KEY = 'lebarrou34-photos-v1';
 
 const DEFAULT_NEWS = [
@@ -2667,25 +2687,35 @@ function deleteNews(id){
    ===================================================== */
 
 const ACTIVITY_ICONS = {
+  // Icônes pour événements ponctuels (repas, sorties, vide-greniers…)
   'chat':     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
   'compass':  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
   'book':     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>',
   'walk':     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>',
   'calendar': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
-  'gift':     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>'
+  'gift':     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>',
+  // Icônes pour activités hebdomadaires (bulletin)
+  'dumbbell': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="9" width="4" height="6" rx="1"/><rect x="18" y="9" width="4" height="6" rx="1"/><line x1="6" y1="12" x2="18" y2="12" stroke-width="2.5"/></svg>',
+  'users':    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  'vessel':   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 22h8M12 15v7M7 10h10M12 15a5 5 0 0 0 5-5c0-2-1-4-2-8H9c-1 4-2 6-2 8a5 5 0 0 0 5 5z"/></svg>',
+  'music':    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>',
+  'brush':    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9.06 11.9l8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg>',
+  'yoga':     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="5" r="2"/><path d="M12 8v5"/><path d="M8 22c1-3.5 3-6 4-6s3 2.5 4 6"/><path d="M5 13c2.5-1 5-1.5 7-1.5s4.5.5 7 1.5"/></svg>',
+  'theater':  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><line x1="9" y1="9" x2="9.01" y2="9" stroke-width="2.5"/><line x1="15" y1="9" x2="15.01" y2="9" stroke-width="2.5"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>'
 };
 
 const DEFAULT_ACTIVITIES = [
-  { id: 1, title: "Repas de quartier",     frequency: "Plusieurs fois par an", icon: "chat",     description: "Notre temps fort de l'année : grande tablée conviviale entre voisins, dans la rue ou sur l'esplanade selon la saison.", author: "Françoise" },
-  { id: 2, title: "Sorties & excursions",  frequency: "Printemps · Automne",   icon: "compass",  description: "Découverte de la région : journées en car vers les villages perchés, marchés de pays, sites naturels du Languedoc.", author: "Jo" },
-  { id: 3, title: "Ateliers & rencontres", frequency: "Toute l'année",         icon: "book",     description: "Causeries, ateliers thématiques, présentations d'auteurs locaux, échanges autour du patrimoine sétois.", author: "Aline" },
-  { id: 4, title: "Marche & bien-être",    frequency: "Mardis matin",          icon: "walk",     description: "Sorties pédestres autour de l'étang de Thau et du Mont Saint-Clair, ouvertes à tous les niveaux.", author: "Françoise" },
-  { id: 5, title: "Vœux & galette",        frequency: "Janvier",               icon: "calendar", description: "Le rendez-vous incontournable de la nouvelle année : galette des rois et présentation du programme à venir.", author: "Bureau" },
-  { id: 6, title: "Vide-greniers",         frequency: "Mai · Septembre",       icon: "gift",     description: "Deux grandes journées dans l'année pour vendre, chiner et faire de bonnes affaires entre habitants du quartier.", author: "Aline" }
+  { id: 1, title: "Gymnastique",         frequency: "Lundi & vendredi · 15h00 – 16h00",              icon: "dumbbell", description: "Séances en salle pour entretenir souplesse, tonus et bonne humeur.",       animator: "Christine FERRARA", phone: "07 83 34 07 01" },
+  { id: 2, title: "Danse de salon",      frequency: "Mardi · 14h00 – 17h00",                         icon: "users",    description: "Apprentissage en couple ou en solo — tous niveaux bienvenus.",             animator: "Jean-Claude SAURA", phone: "06 17 98 07 47" },
+  { id: 3, title: "Modelage & poterie",  frequency: "Mardi · 14h30 – 17h00",                         icon: "vessel",   description: "Atelier créatif autour de l'argile pour débutants comme confirmés.",       animator: "Nathalie GILHET",   phone: "07 83 33 15 28" },
+  { id: 4, title: "Musique",             frequency: "Mardi · 17h00 – 19h00",                         icon: "music",    description: "Répétitions et pratique collective dans une ambiance conviviale.",         animator: "Gérard BERTIN",     phone: "06 65 70 41 03" },
+  { id: 5, title: "Dessin & peinture",   frequency: "Mercredi · 15h00 – 17h00",                      icon: "brush",    description: "Atelier ouvert aux amateurs qui veulent développer leur créativité.",      animator: "Sylvie CONDOMINE",  phone: "06 10 35 42 35" },
+  { id: 6, title: "Yoga",                frequency: "Jeudi · 10h00 – 11h00 ou 11h00 – 12h00",        icon: "yoga",     description: "Deux créneaux au choix — sur chaise ou sur tapis, adaptés à chacun.",       animator: "Edith ALBALADEJO",  phone: "06 81 20 91 28" },
+  { id: 7, title: "Théâtre",             frequency: "Vendredi · 17h00 – 18h30",                      icon: "theater",  description: "Découverte du jeu, improvisation et préparation de scènes courtes.",       animator: "José MONTES",       phone: "06 16 67 59 90" }
 ];
 
 let activities = [];
-let nextActivityId = 7;
+let nextActivityId = 8;
 
 function persistActivities(){
   try { localStorage.setItem(ACTIVITY_STORAGE_KEY, JSON.stringify(activities)); }
@@ -2723,10 +2753,12 @@ function openActivityEditor(id = null){
     document.getElementById('activity-title').value = a.title;
     document.getElementById('activity-frequency').value = a.frequency || '';
     document.getElementById('activity-icon').value = a.icon || 'chat';
+    document.getElementById('activity-animator').value = a.animator || '';
+    document.getElementById('activity-phone').value = a.phone || '';
     document.getElementById('activity-description').value = a.description;
   } else {
     document.getElementById('activityEditorTitle').textContent = 'Nouvelle activité';
-    document.getElementById('activity-icon').value = 'chat';
+    document.getElementById('activity-icon').value = 'dumbbell';
   }
 
   openModal('modal-activity-editor');
@@ -2739,6 +2771,8 @@ function saveActivity(e){
     title: document.getElementById('activity-title').value.trim(),
     frequency: document.getElementById('activity-frequency').value.trim(),
     icon: document.getElementById('activity-icon').value,
+    animator: document.getElementById('activity-animator').value.trim(),
+    phone: document.getElementById('activity-phone').value.trim(),
     description: document.getElementById('activity-description').value.trim()
   };
 
@@ -2775,19 +2809,30 @@ function renderPublicActivities(){
     el.innerHTML = '<div class="empty-state" style="grid-column: 1/-1;">Aucune activité pour le moment.</div>';
     return;
   }
-  el.innerHTML = activities.map(a => `
-    <article class="activity">
-      <div class="activity-pic" aria-hidden="true">
-        ${ACTIVITY_ICONS[a.icon] || ACTIVITY_ICONS.chat}
-      </div>
-      <div>
-        <h3>${escapeHtml(a.title)}</h3>
-        ${a.frequency ? `<div class="activity-meta">${escapeHtml(a.frequency)}</div>` : ''}
-        <p>${escapeHtml(a.description)}</p>
-        ${a.author ? `<div class="activity-author">Proposée par ${escapeHtml(a.author)}</div>` : ''}
-      </div>
-    </article>
-  `).join('');
+  el.innerHTML = activities.map(a => {
+    // Ligne de contact : « Animée par [Nom] · [tél cliquable] »
+    let contact = '';
+    if(a.animator || a.phone){
+      const parts = [];
+      if(a.animator) parts.push(`Animée par ${escapeHtml(a.animator)}`);
+      if(a.phone) parts.push(`<a href="tel:${escapeHtml(a.phone.replace(/\s/g,''))}">${escapeHtml(a.phone)}</a>`);
+      contact = `<div class="activity-author">${parts.join(' · ')}</div>`;
+    } else if(a.author){
+      contact = `<div class="activity-author">Proposée par ${escapeHtml(a.author)}</div>`;
+    }
+    return `
+      <article class="activity">
+        <div class="activity-pic" aria-hidden="true">
+          ${ACTIVITY_ICONS[a.icon] || ACTIVITY_ICONS.chat}
+        </div>
+        <div>
+          <h3>${escapeHtml(a.title)}</h3>
+          ${a.frequency ? `<div class="activity-meta">${escapeHtml(a.frequency)}</div>` : ''}
+          <p>${escapeHtml(a.description)}</p>
+          ${contact}
+        </div>
+      </article>`;
+  }).join('');
 }
 
 /* =====================================================
@@ -3147,7 +3192,7 @@ function renderAdminLists(){
           <h4>${escapeHtml(a.title)}</h4>
           <div class="admin-item-meta">
             ${a.frequency ? `<span>🕐 ${escapeHtml(a.frequency)}</span>` : ''}
-            <span>✍️ ${escapeHtml(a.author || 'Bureau')}</span>
+            ${a.animator ? `<span>👤 ${escapeHtml(a.animator)}</span>` : `<span>✍️ ${escapeHtml(a.author || 'Bureau')}</span>`}
           </div>
         </div>
         <div class="admin-item-actions">
