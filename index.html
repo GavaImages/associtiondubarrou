@@ -1137,6 +1137,145 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
   .container{ padding: 0 1.1rem; }
 }
 
+/* ============ GALERIE PUBLIQUE ============ */
+.gallery-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+.gallery-item{
+  position: relative;
+  aspect-ratio: 4/3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--sand-100);
+  border: 1px solid var(--line);
+  transition: transform .25s, box-shadow .25s;
+}
+.gallery-item:hover{
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+.gallery-item:focus-visible{ outline: 3px solid var(--terra-400); outline-offset: 3px; }
+.gallery-item img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .4s ease-out;
+}
+.gallery-item:hover img{ transform: scale(1.06); }
+.gallery-caption{
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 2rem 1rem .9rem;
+  background: linear-gradient(to top, rgba(0,0,0,.75), transparent);
+  color: #fff;
+  font-size: .9rem;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity .25s;
+  pointer-events: none;
+}
+.gallery-item:hover .gallery-caption,
+.gallery-item:focus-visible .gallery-caption{ opacity: 1; }
+.gallery-caption-date{
+  display: block;
+  font-size: .78rem;
+  font-weight: 400;
+  color: rgba(255,255,255,.85);
+  margin-top: .15rem;
+}
+.gallery-empty{
+  padding: 4rem 2rem;
+  text-align: center;
+  background: var(--white);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  color: var(--ink-soft);
+}
+.gallery-empty svg{ width: 56px; height: 56px; color: var(--sand-300); margin-bottom: 1rem; }
+
+/* ============ LIGHTBOX ============ */
+.lightbox{
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(15, 15, 15, .94);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 5rem 2rem;
+  animation: fadeIn .25s ease;
+}
+.lightbox.is-open{ display: flex; }
+.lightbox-content{
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+#lightbox-img{
+  max-width: 100%;
+  max-height: 78vh;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 12px 40px rgba(0,0,0,.5);
+  animation: fadeIn .2s ease;
+}
+.lightbox-info{
+  color: #fff;
+  text-align: center;
+  max-width: 700px;
+  padding: 0 1rem;
+}
+#lightbox-caption{
+  font-size: 1.1rem;
+  font-family: var(--serif);
+  font-weight: 500;
+  margin-bottom: .3rem;
+}
+#lightbox-meta{
+  font-size: .82rem;
+  color: rgba(255,255,255,.65);
+  letter-spacing: .04em;
+}
+.lightbox-close, .lightbox-nav{
+  position: absolute;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  color: #fff;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 48px; height: 48px;
+  display: grid; place-items: center;
+  z-index: 2;
+  transition: background .2s, transform .15s, border-color .2s;
+}
+.lightbox-close:hover, .lightbox-nav:hover{
+  background: rgba(255,255,255,.2);
+  border-color: rgba(255,255,255,.35);
+}
+.lightbox-close:active, .lightbox-nav:active{ transform: scale(.95); }
+.lightbox-close{ top: 1.5rem; right: 1.5rem; }
+.lightbox-prev{ left: 1.5rem; top: 50%; transform: translateY(-50%); }
+.lightbox-next{ right: 1.5rem; top: 50%; transform: translateY(-50%); }
+.lightbox-prev:active{ transform: translateY(-50%) scale(.95); }
+.lightbox-next:active{ transform: translateY(-50%) scale(.95); }
+.lightbox-nav[hidden]{ display: none; }
+
+@media (max-width: 720px){
+  .lightbox{ padding: 3.5rem .5rem 1rem; }
+  .lightbox-close{ top: .75rem; right: .75rem; width: 42px; height: 42px; }
+  .lightbox-prev{ left: .5rem; width: 42px; height: 42px; }
+  .lightbox-next{ right: .5rem; width: 42px; height: 42px; }
+  #lightbox-img{ max-height: 65vh; }
+  #lightbox-caption{ font-size: 1rem; }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce){
   *, *::before, *::after{
@@ -1192,6 +1331,7 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
         <li><a href="#" data-page="accueil" class="active">Accueil</a></li>
         <li><a href="#" data-page="activites">Activités</a></li>
         <li><a href="#" data-page="actualites">Actualités</a></li>
+        <li><a href="#" data-page="gallery">En images</a></li>
         <li><a href="#" data-page="association">Association</a></li>
         <li><a href="#" data-page="contacts">Contacts</a></li>
       </ul>
@@ -1364,7 +1504,9 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
 
       <div style="margin-top: 3rem; padding: 2rem; background: var(--sand-100); border-radius: var(--radius); border-left: 4px solid var(--terra-500);">
         <h3 style="margin-bottom: .5rem;">Bon à savoir</h3>
-        <p style="margin: 0; color: var(--ink-soft);">La plupart des activités sont réservées aux adhérents à jour de cotisation. Le bulletin d'adhésion est téléchargeable sur la page Association, ou disponible auprès du bureau.</p>
+        <p style="margin: 0 0 .75rem; color: var(--ink-soft);">Les activités sont réservées aux adhérents à jour de cotisation.</p>
+        <p style="margin: 0 0 .75rem; color: var(--ink-soft);">Le bulletin d'adhésion est téléchargeable sur la page Association, ou disponible auprès du bureau.</p>
+        <p style="margin: 0; color: var(--ink-soft);">Pour connaître les tarifs, veuillez contacter directement les animateurs de l'activité qui vous intéresse.</p>
       </div>
     </div>
   </div>
@@ -1397,6 +1539,21 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
       </div>
 
       <div class="news-grid" id="news-grid-full"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EN IMAGES (GALERIE) ============ -->
+<section class="page" id="page-gallery">
+  <div class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Photos du quartier</span>
+        <h2>En images</h2>
+        <p>Les moments forts du Barrou capturés au fil des saisons — cliquez pour agrandir.</p>
+      </div>
+
+      <div class="gallery-grid" id="gallery-grid"></div>
     </div>
   </div>
 </section>
@@ -1598,6 +1755,10 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
           Activités <span class="tab-count" id="tab-count-activities">0</span>
         </button>
+        <button class="admin-tab" role="tab" data-tab="photos" onclick="switchAdminTab('photos')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          Photos <span class="tab-count" id="tab-count-photos">0</span>
+        </button>
       </div>
     </div>
   </div>
@@ -1632,6 +1793,20 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
       <div class="admin-list" id="admin-activities-list"></div>
     </div>
 
+    <div class="admin-panel" id="admin-panel-photos" style="display:none;">
+      <div class="admin-panel-head">
+        <div>
+          <h2>Galerie photo</h2>
+          <p style="color: var(--ink-soft); margin: .3rem 0 0;">Photos affichées dans la section « En images » du site.</p>
+        </div>
+        <button class="btn btn-primary" onclick="openPhotoEditor()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Nouvelle photo
+        </button>
+      </div>
+      <div class="admin-list" id="admin-photos-list"></div>
+    </div>
+
     <div style="margin-top: 3rem; padding: 1.5rem; background: var(--sand-100); border-radius: var(--radius); border-left: 4px solid var(--med-500); font-size: .9rem;">
       <strong>Mode démonstration :</strong> les données sont stockées dans votre navigateur (localStorage). Elles ne sont pas partagées entre appareils.
       <button class="btn btn-ghost btn-sm" onclick="resetAllData()" style="margin-left: 1rem;">Réinitialiser toutes les données</button>
@@ -1664,6 +1839,7 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
           <li><a href="#" data-page="accueil">Accueil</a></li>
           <li><a href="#" data-page="activites">Activités</a></li>
           <li><a href="#" data-page="actualites">Actualités</a></li>
+          <li><a href="#" data-page="gallery">En images</a></li>
           <li><a href="#" data-page="association">Association</a></li>
           <li><a href="#" data-page="contacts">Contacts</a></li>
         </ul>
@@ -1797,6 +1973,60 @@ body.admin:not(.on-admin-page) .admin-fab{ display: inline-flex; }
   </div>
 </div>
 
+<!-- ============ MODAL Éditeur photo (admin) ============ -->
+<div class="modal" id="modal-photo-editor" role="dialog" aria-labelledby="photoEditorTitle" aria-modal="true">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="photoEditorTitle">Ajouter une photo</h3>
+      <button class="modal-close" onclick="closeModal('modal-photo-editor')" aria-label="Fermer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <form onsubmit="savePhoto(event)">
+        <input type="hidden" id="photo-id">
+        <div class="field">
+          <label for="photo-file">Photo *</label>
+          <input type="file" id="photo-file" accept="image/*" onchange="handlePhotoUpload(event)">
+          <div class="field-help">JPG ou PNG. Automatiquement redimensionnée pour l'affichage web.</div>
+          <div id="photo-preview" style="margin-top: .85rem;"></div>
+        </div>
+        <div class="field">
+          <label for="photo-caption">Légende *</label>
+          <input type="text" id="photo-caption" required maxlength="140" placeholder="ex. Repas de quartier — été 2025">
+        </div>
+        <div class="field">
+          <label for="photo-date">Date *</label>
+          <input type="date" id="photo-date" required>
+          <div class="field-help">Date de prise de vue ou de l'événement.</div>
+        </div>
+        <div style="display:flex; gap:.75rem; justify-content:flex-end;">
+          <button type="button" class="btn btn-ghost" onclick="closeModal('modal-photo-editor')">Annuler</button>
+          <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ============ LIGHTBOX (visionneuse plein écran) ============ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visionneuse photo">
+  <button class="lightbox-close" onclick="closeLightbox()" aria-label="Fermer la visionneuse">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <button class="lightbox-nav lightbox-prev" onclick="prevPhoto()" aria-label="Photo précédente">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="lightbox-nav lightbox-next" onclick="nextPhoto()" aria-label="Photo suivante">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <div class="lightbox-content">
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-info">
+      <div id="lightbox-caption"></div>
+      <div id="lightbox-meta"></div>
+    </div>
+  </div>
+</div>
+
 <script>
 /* =====================================================
    ÉTAT & DONNÉES
@@ -1816,6 +2046,7 @@ let currentAdminTab = 'events';
 
 const STORAGE_KEY = 'lebarrou34-news-v2';
 const ACTIVITY_STORAGE_KEY = 'lebarrou34-activities-v2';
+const PHOTO_STORAGE_KEY = 'lebarrou34-photos-v1';
 
 const DEFAULT_NEWS = [
   {
@@ -2447,6 +2678,293 @@ function renderPublicActivities(){
 }
 
 /* =====================================================
+   PHOTOS — DONNÉES, STOCKAGE, GALERIE, LIGHTBOX
+   ===================================================== */
+
+const DEFAULT_PHOTOS = []; // vide par défaut, les admins ajoutent leurs photos
+
+let photos = [];
+let nextPhotoId = 1;
+
+function persistPhotos(){
+  try { localStorage.setItem(PHOTO_STORAGE_KEY, JSON.stringify(photos)); }
+  catch(e){ console.warn('Stockage photos indisponible', e); }
+}
+
+function loadStoredPhotos(){
+  try {
+    const raw = localStorage.getItem(PHOTO_STORAGE_KEY);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      if(Array.isArray(parsed)){
+        photos = parsed;
+        nextPhotoId = parsed.length ? Math.max(...parsed.map(p => p.id)) + 1 : 1;
+        return;
+      }
+    }
+  } catch(e){ console.warn('Lecture photos impossible', e); }
+  photos = DEFAULT_PHOTOS.map(p => ({ ...p }));
+  nextPhotoId = photos.length ? Math.max(...photos.map(p => p.id)) + 1 : 1;
+  persistPhotos();
+}
+
+/* ---- Galerie publique ---- */
+
+function renderPublicGallery(){
+  const el = document.getElementById('gallery-grid');
+  if(!el) return;
+  const sorted = [...photos].sort((a,b) => b.date.localeCompare(a.date));
+
+  if(sorted.length === 0){
+    el.innerHTML = `
+      <div class="gallery-empty" style="grid-column: 1/-1;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <p style="margin: 0; font-size: 1.05rem;">Aucune photo pour le moment.</p>
+        <p style="margin: .3rem 0 0; font-size: .9rem;">Les photos ajoutées par le bureau apparaîtront ici.</p>
+      </div>`;
+    return;
+  }
+
+  el.innerHTML = sorted.map((p, i) => `
+    <article class="gallery-item" onclick="openLightbox(${i})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(${i});}" tabindex="0" role="button" aria-label="Agrandir : ${escapeHtml(p.caption || 'photo')}">
+      <img src="${p.image}" alt="${escapeHtml(p.caption || '')}" loading="lazy">
+      <div class="gallery-caption">
+        ${escapeHtml(p.caption || '')}
+        <span class="gallery-caption-date">${formatDate(p.date)}</span>
+      </div>
+    </article>
+  `).join('');
+}
+
+/* ---- Lightbox (visionneuse plein écran) ---- */
+
+let lightboxPhotos = [];
+let lightboxIndex = 0;
+
+function openLightbox(index){
+  lightboxPhotos = [...photos].sort((a,b) => b.date.localeCompare(a.date));
+  if(lightboxPhotos.length === 0) return;
+  lightboxIndex = Math.max(0, Math.min(index, lightboxPhotos.length - 1));
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+}
+
+function openLightboxFromAdmin(photoId){
+  const sorted = [...photos].sort((a,b) => b.date.localeCompare(a.date));
+  const index = sorted.findIndex(p => p.id === photoId);
+  if(index >= 0) openLightbox(index);
+}
+
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('is-open');
+  document.body.style.overflow = '';
+}
+
+function updateLightbox(){
+  const p = lightboxPhotos[lightboxIndex];
+  if(!p) return;
+  const img = document.getElementById('lightbox-img');
+  img.src = p.image;
+  img.alt = p.caption || '';
+  document.getElementById('lightbox-caption').textContent = p.caption || '';
+  document.getElementById('lightbox-meta').textContent =
+    `${formatDate(p.date)} · Photo ${lightboxIndex + 1} sur ${lightboxPhotos.length}`;
+  // Cacher les flèches s'il n'y a qu'une seule photo
+  const single = lightboxPhotos.length <= 1;
+  document.querySelector('.lightbox-prev').hidden = single;
+  document.querySelector('.lightbox-next').hidden = single;
+}
+
+function nextPhoto(){
+  if(lightboxPhotos.length <= 1) return;
+  lightboxIndex = (lightboxIndex + 1) % lightboxPhotos.length;
+  updateLightbox();
+}
+function prevPhoto(){
+  if(lightboxPhotos.length <= 1) return;
+  lightboxIndex = (lightboxIndex - 1 + lightboxPhotos.length) % lightboxPhotos.length;
+  updateLightbox();
+}
+
+// Navigation clavier dans la lightbox
+document.addEventListener('keydown', e => {
+  const lb = document.getElementById('lightbox');
+  if(!lb || !lb.classList.contains('is-open')) return;
+  if(e.key === 'Escape'){ e.preventDefault(); closeLightbox(); }
+  else if(e.key === 'ArrowRight'){ e.preventDefault(); nextPhoto(); }
+  else if(e.key === 'ArrowLeft'){ e.preventDefault(); prevPhoto(); }
+});
+
+// Fermeture au clic sur le fond noir
+document.addEventListener('DOMContentLoaded', () => {
+  const lb = document.getElementById('lightbox');
+  if(lb) lb.addEventListener('click', e => {
+    if(e.target === lb || e.target.classList.contains('lightbox-content')) closeLightbox();
+  });
+});
+
+// Support tactile : swipe pour naviguer sur mobile
+let touchStartX = 0;
+document.addEventListener('touchstart', e => {
+  const lb = document.getElementById('lightbox');
+  if(lb && lb.classList.contains('is-open')) touchStartX = e.touches[0].clientX;
+}, { passive: true });
+document.addEventListener('touchend', e => {
+  const lb = document.getElementById('lightbox');
+  if(!lb || !lb.classList.contains('is-open')) return;
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if(Math.abs(dx) > 50){
+    if(dx < 0) nextPhoto();
+    else prevPhoto();
+  }
+}, { passive: true });
+
+/* ---- Éditeur photo (admin) ---- */
+
+let currentPhotoImage = null;
+let photoProcessing = false;
+
+function openPhotoEditor(id = null){
+  if(!currentUser) return;
+  const form = document.getElementById('modal-photo-editor').querySelector('form');
+  form.reset();
+  document.getElementById('photo-id').value = '';
+  currentPhotoImage = null;
+  photoProcessing = false;
+  document.getElementById('photo-preview').innerHTML = '';
+
+  if(id){
+    const p = photos.find(x => x.id === id);
+    if(!p) return;
+    document.getElementById('photoEditorTitle').textContent = 'Modifier la photo';
+    document.getElementById('photo-id').value = p.id;
+    document.getElementById('photo-caption').value = p.caption || '';
+    document.getElementById('photo-date').value = p.date;
+    if(p.image){
+      currentPhotoImage = p.image;
+      showPhotoPreview(p.image);
+    }
+  } else {
+    document.getElementById('photoEditorTitle').textContent = 'Ajouter une photo';
+    document.getElementById('photo-date').value = new Date().toISOString().split('T')[0];
+  }
+
+  openModal('modal-photo-editor');
+}
+
+function handlePhotoUpload(e){
+  const file = e.target.files[0];
+  if(!file) return;
+
+  const name = (file.name || '').toLowerCase();
+  const type = (file.type || '').toLowerCase();
+  const preview = document.getElementById('photo-preview');
+
+  if(name.endsWith('.heic') || name.endsWith('.heif') ||
+     type === 'image/heic' || type === 'image/heif'){
+    alert("Le format HEIC (photos iPhone) n'est pas lisible par le navigateur.\n\n" +
+          "Solutions :\n" +
+          "• iPhone → Réglages → Appareil photo → Formats → « Le plus compatible »\n" +
+          "• Ou exportez la photo en JPG avant importation.");
+    e.target.value = '';
+    return;
+  }
+
+  if(!type.startsWith('image/')){
+    alert('Veuillez sélectionner une image (JPG, PNG ou WebP).');
+    e.target.value = '';
+    return;
+  }
+
+  if(file.size > 25 * 1024 * 1024){
+    alert("Cette image dépasse 25 Mo — trop lourde. Compressez-la avant réimport.");
+    e.target.value = '';
+    return;
+  }
+
+  photoProcessing = true;
+  preview.innerHTML = `
+    <div style="padding: 1rem 1.25rem; background: var(--sand-100); border: 1px solid var(--line); border-radius: var(--radius-sm); color: var(--ink-soft); display:flex; align-items:center; gap:.75rem;">
+      <div style="width:20px; height:20px; border: 2px solid var(--sand-300); border-top-color: var(--terra-500); border-radius: 50%; animation: spin 0.8s linear infinite;"></div>
+      <span>Traitement de l'image…</span>
+    </div>`;
+
+  resizeImage(file, 1600, 0.85)  // un peu plus grand pour la galerie
+    .then(dataUrl => {
+      currentPhotoImage = dataUrl;
+      photoProcessing = false;
+      showPhotoPreview(dataUrl);
+    })
+    .catch(() => {
+      photoProcessing = false;
+      preview.innerHTML = '';
+      alert("Impossible de lire cette image. Essayez avec un fichier JPG ou PNG classique.");
+      e.target.value = '';
+    });
+}
+
+function showPhotoPreview(dataUrl){
+  document.getElementById('photo-preview').innerHTML = `
+    <div style="position:relative; display:inline-block; max-width:100%;">
+      <img src="${dataUrl}" alt="Aperçu" style="max-width:100%; max-height:240px; border-radius: var(--radius-sm); display:block; border:1px solid var(--line);">
+      <button type="button" onclick="removePhotoImage()" style="position:absolute; top:.4rem; right:.4rem; background: rgba(0,0,0,.65); color:#fff; border:none; width:30px; height:30px; border-radius:50%; cursor:pointer; font-size:1rem;" aria-label="Retirer l'image">×</button>
+    </div>`;
+}
+
+function removePhotoImage(){
+  currentPhotoImage = null;
+  document.getElementById('photo-file').value = '';
+  document.getElementById('photo-preview').innerHTML = '';
+}
+
+function savePhoto(e){
+  e.preventDefault();
+  if(photoProcessing){
+    alert("La photo est encore en cours de traitement.");
+    return;
+  }
+  if(!currentPhotoImage){
+    alert("Veuillez sélectionner une photo.");
+    return;
+  }
+
+  const id = document.getElementById('photo-id').value;
+  const data = {
+    image: currentPhotoImage,
+    caption: document.getElementById('photo-caption').value.trim(),
+    date: document.getElementById('photo-date').value,
+    author: currentUser ? currentUser.displayName : 'Bureau'
+  };
+
+  if(id){
+    const idx = photos.findIndex(x => x.id === parseInt(id));
+    if(idx >= 0) photos[idx] = { ...photos[idx], ...data };
+  } else {
+    photos.unshift({ id: nextPhotoId++, ...data });
+  }
+
+  try { persistPhotos(); }
+  catch(err){
+    alert("Le stockage local est plein. Supprimez d'anciennes photos.");
+    return;
+  }
+
+  closeModal('modal-photo-editor');
+  renderPublicGallery();
+  renderAdminLists();
+  showToast(id ? '✓ Photo modifiée' : '✓ Photo ajoutée');
+}
+
+function deletePhoto(id){
+  if(!confirm('Supprimer cette photo ? Cette action est définitive.')) return;
+  photos = photos.filter(x => x.id !== id);
+  persistPhotos();
+  renderPublicGallery();
+  renderAdminLists();
+}
+
+/* =====================================================
    DASHBOARD — LISTES ADMIN
    ===================================================== */
 
@@ -2457,6 +2975,7 @@ function switchAdminTab(tab){
   });
   document.getElementById('admin-panel-events').style.display = tab === 'events' ? 'block' : 'none';
   document.getElementById('admin-panel-activities').style.display = tab === 'activities' ? 'block' : 'none';
+  document.getElementById('admin-panel-photos').style.display = tab === 'photos' ? 'block' : 'none';
 }
 
 function renderAdminLists(){
@@ -2526,6 +3045,38 @@ function renderAdminLists(){
       </div>
     `).join('');
   }
+
+  // Photos
+  document.getElementById('tab-count-photos').textContent = photos.length;
+  const photoEl = document.getElementById('admin-photos-list');
+  const sortedPhotos = [...photos].sort((a,b) => b.date.localeCompare(a.date));
+  if(sortedPhotos.length === 0){
+    photoEl.innerHTML = '<div class="admin-empty">Aucune photo pour le moment. Cliquez sur « Nouvelle photo » pour en ajouter.</div>';
+  } else {
+    photoEl.innerHTML = sortedPhotos.map(p => `
+      <div class="admin-item">
+        <div class="admin-item-thumb" style="background-image: url('${p.image}'); background-size: cover; background-position: center;"></div>
+        <div class="admin-item-body">
+          <h4>${escapeHtml(p.caption || 'Sans légende')}</h4>
+          <div class="admin-item-meta">
+            <span>📅 ${formatDate(p.date)}</span>
+            <span>✍️ ${escapeHtml(p.author || 'Bureau')}</span>
+          </div>
+        </div>
+        <div class="admin-item-actions">
+          <button class="icon-btn" onclick="openLightboxFromAdmin(${p.id})" title="Aperçu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+          <button class="icon-btn" onclick="openPhotoEditor(${p.id})" title="Modifier">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </button>
+          <button class="icon-btn" onclick="deletePhoto(${p.id})" title="Supprimer" style="color: var(--terra-600);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+          </button>
+        </div>
+      </div>
+    `).join('');
+  }
 }
 
 /* =====================================================
@@ -2541,15 +3092,19 @@ function showToast(message){
 }
 
 function resetAllData(){
-  if(!confirm('Réinitialiser TOUTES les données (événements + activités) avec le contenu d\'exemple ?')) return;
+  if(!confirm('Réinitialiser TOUTES les données (événements + activités + photos) avec le contenu d\'exemple ?')) return;
   news = DEFAULT_NEWS.map(n => ({ ...n }));
   nextId = Math.max(...news.map(n => n.id)) + 1;
   activities = DEFAULT_ACTIVITIES.map(a => ({ ...a }));
   nextActivityId = Math.max(...activities.map(a => a.id)) + 1;
+  photos = DEFAULT_PHOTOS.map(p => ({ ...p }));
+  nextPhotoId = photos.length ? Math.max(...photos.map(p => p.id)) + 1 : 1;
   persistNews();
   persistActivities();
+  persistPhotos();
   renderNews();
   renderPublicActivities();
+  renderPublicGallery();
   renderAdminLists();
   showToast('✓ Données réinitialisées');
 }
@@ -2594,9 +3149,11 @@ function handleContact(e){
 document.getElementById('year').textContent = new Date().getFullYear();
 loadStoredNews();
 loadStoredActivities();
+loadStoredPhotos();
 restoreSession();
 renderNews();
 renderPublicActivities();
+renderPublicGallery();
 if(currentUser) renderAdminLists();
 </script>
 </body>
